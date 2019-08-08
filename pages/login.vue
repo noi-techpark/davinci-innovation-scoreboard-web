@@ -14,6 +14,9 @@
           name="email"
           placeholder="Email"
           class="py-1 border-b border-black text-2xl placeholder-gray-500 focus:border-primary-500"
+          required
+          autocomplete="email"
+          autofocus
         />
       </div>
 
@@ -26,13 +29,15 @@
           name="password"
           placeholder="Password"
           class="py-1 border-b border-black text-2xl placeholder-gray-500 focus:border-primary-500"
+          required
+          autocomplete="current-password"
         />
       </div>
 
       <div class="mt-5 flex justify-between">
         <div class="text-error-500">
-          <img src="~/assets/images/error.svg" class="inline mr-2" /> Login
-          failed.
+          <!-- <img src="~/assets/images/error.svg" class="inline mr-2" /> Login
+          failed. -->
         </div>
         <button
           type="submit"
