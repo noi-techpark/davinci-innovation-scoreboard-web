@@ -11,6 +11,7 @@ module.exports = {
       black: '#000',
       gray: {
         '300': '#F4F4F4',
+        '400': '#c8c8c8',
         '500': '#707070'
       },
       primary: {
@@ -28,6 +29,7 @@ module.exports = {
       '4': '2rem',
       '5': '4rem',
       '6': '6rem',
+      'i': '1.5rem'
     },
     extend: {
       borderWidth: {
