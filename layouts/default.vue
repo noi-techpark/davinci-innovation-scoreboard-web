@@ -1,0 +1,133 @@
+<template>
+  <div id="body">
+    <div class="mb-4 xl:mb-5 flex content-end border-b border-gray-500">
+      <div class="p-4 flex flex-col justify-center">
+        <img src="~/static/noi.svg" alt="NOI" class="image-noi" />
+      </div>
+      <div
+        class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-4xl"
+      >
+        Innovation<br />
+        Scoreboard
+      </div>
+      <div class="p-4 hidden xl:flex flex-col justify-end">
+        <img
+          src="~/static/efre-fesr.jpg"
+          alt="Europäischer Fonds für regionale Entwicklung - Südtirol - Fondo europeo per lo sviluppo regionale - Alto Adige"
+          class="image-efre-fesr"
+        />
+      </div>
+    </div>
+    <div class="mb-4 px-4 flex xl:hidden justify-center">
+      <img
+        src="~/static/efre-fesr.jpg"
+        alt="Europäischer Fonds für regionale Entwicklung - Südtirol - Fondo europeo per lo sviluppo regionale - Alto Adige"
+        class="image-efre-fesr"
+      />
+    </div>
+    <div class="flex justify-center">
+      <div id="content">
+        <nuxt />
+
+        <div
+          class="mt-4 mb-0 xl:mb-4 flex flex-col xl:flex-row justify-between bg-gray-300"
+        >
+          <div class="m-5 flex flex-col">
+            <div class="mb-3 text-2xl font-bold">
+              &copy; {{ year }} DAVINCI - a project form NOI Techpark
+            </div>
+            <div class="flex flex-row leading-relaxed">
+              <div class="mr-5">
+                NOI SPA<br />
+                Techpark Südtirol / Alto Adige<br />
+                <a href="mailto:info@davinci.bz.it" class="hover:underline"
+                  >info@davinci.bz.it</a
+                >
+              </div>
+              <div>
+                A.-Volta-Straße 13/A - 39100 Bozen/South Tyrol - Italy<br />
+                P.IVA 02595720216<br />
+                <a href="https://noi.bz.it" class="hover:underline"
+                  >noi.bz.it</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="m-5 mt-0 xl:mt-5 flex flex-row xl:flex-col justify-between"
+          >
+            <div class="order-first xl:order-last flex flex-col justify-center">
+              <div class="text-left xl:text-right text-lg font-bold">
+                Developed by
+                <a href="https://aboutbits.it" class="hover:underline"
+                  >About Bits</a
+                >
+              </div>
+            </div>
+            <div class="order-last xl:order-first flex justify-end">
+              <img
+                src="~/static/davinci.png"
+                alt="Davinci - Big Data"
+                class="image-davinci"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    year() {
+      return new Date().getUTCFullYear()
+    }
+  }
+}
+</script>
+
+<style>
+#body {
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply text-black;
+}
+
+#content {
+  width: 100%;
+
+  @screen xl {
+    width: 1280px;
+  }
+}
+
+.image-noi {
+  width: auto;
+  height: 50px;
+
+  @screen xl {
+    height: 65px;
+  }
+}
+
+.image-efre-fesr {
+  width: auto;
+  height: auto;
+
+  @screen sm {
+    height: 90px;
+  }
+
+  @screen xl {
+    height: 100px;
+  }
+}
+
+.image-davinci {
+  width: auto;
+  height: 60px;
+}
+</style>

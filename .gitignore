@@ -1,0 +1,16 @@
+# Basic
+.DS_Store
+.idea
+.editorconfig
+
+# Project
+node_modules/
+npm-debug.log*
+.npm
+logs
+*.log
+.eslintcache
+.nuxt
+sw.*
+dist
+.env
