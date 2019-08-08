@@ -1,29 +1,31 @@
 <template>
   <div id="body">
-    <div class="mb-4 xl:mb-5 flex content-end border-b border-gray-500">
-      <div class="p-4 flex flex-col justify-center">
-        <img src="~/static/noi.svg" alt="NOI" class="image-noi" />
+    <div class="mb-4">
+      <div class="mb-4 xl:mb-0 flex content-end border-b border-gray-500">
+        <div class="p-4 flex flex-col justify-center">
+          <img src="~/static/noi.svg" alt="NOI" class="image-noi" />
+        </div>
+        <div
+          class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-4xl"
+        >
+          Innovation<br />
+          Scoreboard
+        </div>
+        <div class="p-4 hidden xl:flex flex-col justify-end">
+          <img
+            src="~/static/efre-fesr.jpg"
+            alt="Europäischer Fonds für regionale Entwicklung - Südtirol - Fondo europeo per lo sviluppo regionale - Alto Adige"
+            class="image-efre-fesr"
+          />
+        </div>
       </div>
-      <div
-        class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-4xl"
-      >
-        Innovation<br />
-        Scoreboard
-      </div>
-      <div class="p-4 hidden xl:flex flex-col justify-end">
+      <div class="mx-4 flex xl:hidden justify-center">
         <img
           src="~/static/efre-fesr.jpg"
           alt="Europäischer Fonds für regionale Entwicklung - Südtirol - Fondo europeo per lo sviluppo regionale - Alto Adige"
           class="image-efre-fesr"
         />
       </div>
-    </div>
-    <div class="mb-4 px-4 flex xl:hidden justify-center">
-      <img
-        src="~/static/efre-fesr.jpg"
-        alt="Europäischer Fonds für regionale Entwicklung - Südtirol - Fondo europeo per lo sviluppo regionale - Alto Adige"
-        class="image-efre-fesr"
-      />
     </div>
     <div class="flex justify-center">
       <div id="content">
