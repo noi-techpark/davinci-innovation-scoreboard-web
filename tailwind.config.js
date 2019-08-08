@@ -7,10 +7,17 @@
 module.exports = {
   theme: {
     colors: {
-      black: '#000000',
+      white: '#FFF',
+      black: '#000',
       gray: {
         '300': '#F4F4F4',
         '500': '#707070'
+      },
+      primary: {
+        '500': '#C1CA01',
+      },
+      error: {
+        '500': '#D20707',
       }
     },
     spacing: {
@@ -22,6 +29,11 @@ module.exports = {
       '5': '4rem',
       '6': '6rem',
     },
+    extend: {
+      borderWidth: {
+        '3': '3px',
+      }
+    }
   },
   variants: {},
   plugins: []
