@@ -2,6 +2,7 @@
   <div class="p-5 flex justify-center bg-gray-300">
     <form
       class="login__container mx-2 my-4 xl:mx-0 p-5 border-3 border-black bg-white"
+      @submit.prevent="login"
     >
       <div class="mb-5">
         <img src="~/assets/images/login.png" alt="Login" class="login__image" />
@@ -10,6 +11,8 @@
       <div class="flex flex-col">
         <label for="email" class="font-bold text-primary-500">Email *</label>
         <input
+          ref="email"
+          v-model="email"
           type="text"
           name="email"
           placeholder="Email"
@@ -25,6 +28,7 @@
           >Password *</label
         >
         <input
+          v-model="password"
           type="password"
           name="password"
           placeholder="Password"
@@ -35,12 +39,14 @@
       </div>
 
       <div class="mt-5 flex justify-between">
-        <div class="text-error-500">
-          <ErrorIcon class="inline mr-2" /> Login failed.
+        <div v-if="error" class="text-error-500">
+          <ErrorIcon class="inline mr-2" /> {{ error }}
         </div>
+        <div v-else />
         <button
           type="submit"
           class="px-4 py-2 border-3 border-black hover:bg-black hover:text-white uppercase"
+          :disabled="sending"
         >
           Login
         </button>
@@ -53,8 +59,38 @@
 import ErrorIcon from '@/components/icons/error.vue'
 
 export default {
+  auth: 'guest',
   components: {
     ErrorIcon
+  },
+  data() {
+    return {
+      email: '',
+      password: '',
+      sending: false,
+      error: null
+    }
+  },
+  methods: {
+    async login(event) {
+      try {
+        this.sending = true
+        this.error = null
+
+        await this.$auth.loginWith('local', {
+          data: {
+            username: this.email,
+            password: this.password
+          }
+        })
+
+        this.sending = false
+      } catch (e) {
+        this.error = 'Authentication failed'
+        this.sending = false
+        this.$refs.email.focus()
+      }
+    }
   }
 }
 </script>

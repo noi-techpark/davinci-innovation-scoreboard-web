@@ -1,8 +1,5 @@
 export default {
   mode: 'spa',
-  /*
-   ** Headers of the page
-   */
   head: {
     title: 'Innovation Scoreboard',
     meta: [
@@ -19,49 +16,45 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap' }
     ]
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+  plugins: [
+    '~/plugins/filters'
+  ],
   devModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss'
   ],
-  /*
-   ** Nuxt.js modules
-   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
-  /*
-   ** Build configuration
-   */
+  axios: {
+    baseURL: 'http://localhost:8080/api/v1/'
+  },
+  router: {
+    //middleware: ['auth']
+  },
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/admin'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'authenticate', method: 'post', propertyName: 'token' },
+          user: { url: 'me', method: 'get' },
+          logout: false
+
+        }
+      }
+    }
+  },
   build: {
-    /*
-      ** You can extend webpack config here
-    */
     extend(config, ctx) {
-        // Run ESLint on save
         if (ctx.isDev && ctx.isClient) {
           config.module.rules.push({
             enforce: "pre",

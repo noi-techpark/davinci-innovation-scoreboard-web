@@ -3,16 +3,16 @@
     <div class="mb-4">
       <div class="mb-4 xl:mb-0 flex content-end border-b border-gray-500">
         <div class="p-4 flex flex-col justify-center">
-          <a href="/"
+          <nuxt-link to="/"
             ><img src="~/static/noi.svg" alt="NOI" class="image-noi"
-          /></a>
+          /></nuxt-link>
         </div>
         <div
           class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-4xl"
         >
-          <a href="/"
+          <nuxt-link to="/"
             >Innovation<br />
-            Scoreboard</a
+            Scoreboard</nuxt-link
           >
         </div>
         <div class="p-4 hidden xl:flex flex-col justify-end">
