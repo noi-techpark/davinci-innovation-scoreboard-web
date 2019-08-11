@@ -84,6 +84,7 @@ export default {
           }
         })
 
+        // this.$router.push('/admin')
         this.sending = false
       } catch (e) {
         this.error = 'Authentication failed'

@@ -34,7 +34,7 @@ export default {
     baseURL: 'http://localhost:8080/api/v1/'
   },
   router: {
-    //middleware: ['auth']
+    middleware: ['auth']
   },
   auth: {
     redirect: {
@@ -46,7 +46,7 @@ export default {
       local: {
         endpoints: {
           login: { url: 'authenticate', method: 'post', propertyName: 'token' },
-          user: { url: 'me', method: 'get' },
+          user: false,
           logout: false
 
         }
