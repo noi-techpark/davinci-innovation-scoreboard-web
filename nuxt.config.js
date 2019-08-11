@@ -19,6 +19,7 @@ export default {
   loading: { color: '#fff' },
   css: [],
   plugins: [
+    '~/plugins/axios',
     '~/plugins/filters'
   ],
   devModules: [
@@ -51,7 +52,8 @@ export default {
 
         }
       }
-    }
+    },
+    resetOnError: true
   },
   build: {
     extend(config, ctx) {
