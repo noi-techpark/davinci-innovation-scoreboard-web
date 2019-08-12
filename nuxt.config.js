@@ -32,7 +32,7 @@ export default {
     '@nuxtjs/pwa'
   ],
   axios: {
-    baseURL: 'http://localhost:8080/api/v1/'
+    baseURL: 'http://localhost:8080/v1/'
   },
   router: {
     middleware: ['auth']

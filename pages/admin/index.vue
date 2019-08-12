@@ -134,7 +134,7 @@
         <tbody>
           <tr v-for="(item, id) in history" :key="id" class="row">
             <td class="cell">{{ item.source }}</td>
-            <td class="cell">{{ item.date | formatDate }}</td>
+            <td class="cell">{{ item.importDate | formatDate }}</td>
             <td class="cell">{{ item.status }}</td>
           </tr>
         </tbody>
