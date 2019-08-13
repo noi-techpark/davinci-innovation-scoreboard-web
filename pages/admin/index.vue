@@ -127,7 +127,7 @@
         <thead>
           <tr class="table__header">
             <th class="column__header">Source</th>
-            <th class="column__header">Date</th>
+            <th class="column__header">Upload Date</th>
             <th class="column__header">Status</th>
           </tr>
         </thead>
