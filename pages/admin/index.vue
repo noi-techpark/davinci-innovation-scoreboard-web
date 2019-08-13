@@ -200,7 +200,6 @@ export default {
   methods: {
     async logout() {
       await this.$auth.logout()
-      // this.$router.push('/login')
     },
     updateHistory() {
       this.$axios.get('stats/upload/history').then((response) => {
