@@ -8,7 +8,7 @@
           /></nuxt-link>
         </div>
         <div
-          class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-4xl"
+          class="flex-1 p-4 border-l border-gray-500 leading-tight font-light text-3xl sm:text-4xl"
         >
           <nuxt-link to="/"
             >Innovation<br />
@@ -38,7 +38,7 @@
       <div
         class="mt-4 mb-0 xl:mb-4 flex flex-col xl:flex-row justify-between bg-gray-300"
       >
-        <div class="m-5 flex flex-col">
+        <div class="m-4 md:m-5 flex flex-col">
           <div class="mb-3 text-base md:text-2xl font-bold">
             &copy; {{ year }} DAVINCI - a project form NOI Techpark
           </div>
@@ -59,7 +59,9 @@
             </div>
           </div>
         </div>
-        <div class="m-5 mt-0 xl:mt-5 flex flex-row xl:flex-col justify-between">
+        <div
+          class="m-4 md:m-5 mt-0 xl:mt-5 flex flex-row xl:flex-col justify-between"
+        >
           <div
             class="flex-1 order-first xl:order-last flex flex-col justify-center"
           >
@@ -103,7 +105,11 @@ export default {
 
 .image-noi {
   width: auto;
-  height: 50px;
+  height: 40px;
+
+  @screen sm {
+    height: 50px;
+  }
 
   @screen xl {
     height: 65px;

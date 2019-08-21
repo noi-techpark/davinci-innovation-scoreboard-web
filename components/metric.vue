@@ -1,7 +1,12 @@
 <template>
   <div
-    class="mt-5 md:mt-6 px-4 flex flex-col justify-end"
-    :class="{ 'w-full': isMetricOpen, 'w-full xl:w-1/2': isMetricClose }"
+    class="mt-5 md:mt-6 px-4 xl:px-0 flex flex-col justify-end"
+    :class="{
+      'w-full': isMetricOpen,
+      'w-full xl:w-1/2': isMetricClose,
+      'xl:pl-4 xl:pr-0': showLeftPadding,
+      'xl:pl-0 xl:pr-4': showRightPadding
+    }"
   >
     <div
       class="border-b-2 border-black font-bold text-xl md:text-2xl uppercase"
@@ -13,7 +18,7 @@
         class="mb-1 leading-none font-light text-5xl sm:text-6xl md:text-8xl "
         :class="['text-metric' + index + '-500']"
       >
-        <CountUp :number="metric.value" /> %
+        <CountUp :number="metric.value" :suffix="metric.unit" />
       </div>
 
       <div class="mt-1 flex flex-col justify-center">
@@ -36,14 +41,35 @@
         </button>
       </div>
     </div>
+    <div v-if="isMetricOpen" class="mt-3">
+      <div class="text-base sm:text-lg md:text-xl">
+        {{ metric.description }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
+
+function moduloComparisonValueforLeftPadding(openMetric, index) {
+  if (openMetric === null) return 1
+
+  if (openMetric < index && openMetric % 2 === 0) return 0
+
+  return 1
+}
+
+function moduloComparisonValueforRightPadding(openMetric, index) {
+  if (openMetric === null) return 0
+
+  if (openMetric < index && openMetric % 2 === 0) return 1
+
+  return 0
+}
 
 export default {
   components: {
@@ -67,10 +93,30 @@ export default {
     },
     isMetricClose() {
       return !this.$store.getters['metrics/isMetricOpen'](this.index)
+    },
+    showLeftPadding() {
+      return (
+        this.isMetricClose &&
+        this.index % 2 ===
+          moduloComparisonValueforLeftPadding(
+            this.$store.state.metrics.openMetric,
+            this.index
+          )
+      )
+    },
+    showRightPadding() {
+      return (
+        this.isMetricClose &&
+        this.index % 2 ===
+          moduloComparisonValueforRightPadding(
+            this.$store.state.metrics.openMetric,
+            this.index
+          )
+      )
     }
   },
   methods: {
-    ...mapActions({
+    ...mapMutations({
       openMetric: 'metrics/openMetric',
       closeMetric: 'metrics/closeMetric'
     })
