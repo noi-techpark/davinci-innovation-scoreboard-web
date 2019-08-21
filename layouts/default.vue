@@ -39,10 +39,12 @@
         class="mt-4 mb-0 xl:mb-4 flex flex-col xl:flex-row justify-between bg-gray-300"
       >
         <div class="m-5 flex flex-col">
-          <div class="mb-3 text-2xl font-bold">
+          <div class="mb-3 text-base md:text-2xl font-bold">
             &copy; {{ year }} DAVINCI - a project form NOI Techpark
           </div>
-          <div class="flex flex-row leading-relaxed">
+          <div
+            class="flex flex-col sm:flex-row leading-relaxed text-xs md:text-base"
+          >
             <div class="mr-5">
               NOI SPA<br />
               Techpark Südtirol / Alto Adige<br />
@@ -50,7 +52,7 @@
                 >info@davinci.bz.it</a
               >
             </div>
-            <div>
+            <div class="mt-3 sm:mt-0">
               A.-Volta-Straße 13/A - 39100 Bozen/South Tyrol - Italy<br />
               P.IVA 02595720216<br />
               <a href="https://noi.bz.it" class="hover:underline">noi.bz.it</a>
@@ -58,15 +60,17 @@
           </div>
         </div>
         <div class="m-5 mt-0 xl:mt-5 flex flex-row xl:flex-col justify-between">
-          <div class="order-first xl:order-last flex flex-col justify-center">
-            <div class="text-left xl:text-right text-lg font-bold">
+          <div
+            class="flex-1 order-first xl:order-last flex flex-col justify-center"
+          >
+            <div class="text-left xl:text-right text-xs md:text-lg font-bold">
               Developed by
               <a href="https://aboutbits.it" class="hover:underline"
                 >About Bits</a
               >
             </div>
           </div>
-          <div class="order-last xl:order-first flex justify-end">
+          <div class="flex-1 order-last xl:order-first flex justify-end">
             <img
               src="~/static/davinci.png"
               alt="Davinci - Big Data"
@@ -121,6 +125,11 @@ export default {
 
 .image-davinci {
   width: auto;
-  height: 60px;
+  height: auto;
+  max-height: 50px;
+
+  @screen md {
+    height: 60px;
+  }
 }
 </style>

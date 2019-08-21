@@ -68,5 +68,8 @@ export const actions = {
   openMetric({ commit }, index) {
     commit('closeMetrics')
     commit('openMetric', index)
+  },
+  closeMetric({ commit }, index) {
+    commit('closeMetrics')
   }
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-wrap">
+  <div class="my-5 md:my-6 flex flex-wrap">
     <div
       class="title-box mx-4 w-full flex flex-col justify-end p-4 border-3 border-black"
     >
       <div
-        class="leading-tight font-thin text-5xl md:text-6xl lg:text-7xl uppercase"
+        class="leading-tight font-thin text-4xl md:text-6xl lg:text-7xl uppercase"
       >
         All Statistical Innovation Data for South Tyrol
       </div>
