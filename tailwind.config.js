@@ -20,6 +20,24 @@ module.exports = {
       },
       error: {
         '500': '#D20707',
+      },
+      metric0: {
+        '500': '#D5575C',
+      },
+      metric1: {
+        '500': '#7D9963',
+      },
+      metric2: {
+        '500': '#F2D20F',
+      },
+      metric3: {
+        '500': '#98BBD6',
+      },
+      metric4: {
+        '500': '#A8C038',
+      },
+      metric5: {
+        '500': '#DF7226',
       }
     },
     spacing: {
@@ -35,6 +53,9 @@ module.exports = {
     extend: {
       borderWidth: {
         '3': '3px',
+      },
+      fontSize: {
+        '7xl': '7rem',
       }
     }
   },
