@@ -52,10 +52,11 @@ module.exports = {
     },
     extend: {
       borderWidth: {
-        '3': '3px',
+        '3': '3px'
       },
       fontSize: {
-        '7xl': '7rem',
+        '7xl': '5rem',
+        '8xl': '7rem'
       }
     }
   },
