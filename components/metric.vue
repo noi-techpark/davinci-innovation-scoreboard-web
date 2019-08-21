@@ -45,6 +45,9 @@
       <div class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
+      <div class="mt-4 py-4 chart-box">
+        <HorizontalBarChart :chart-data="chartData2" class="chart" />
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +57,7 @@ import { mapMutations } from 'vuex'
 import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
+import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -75,7 +79,8 @@ export default {
   components: {
     CountUp,
     OpenIcon,
-    CloseIcon
+    CloseIcon,
+    HorizontalBarChart
   },
   props: {
     index: {
@@ -93,6 +98,9 @@ export default {
     },
     isMetricClose() {
       return !this.$store.getters['metrics/isMetricOpen'](this.index)
+    },
+    chartData2() {
+      return this.$store.getters['metrics/getChartData2'](this.index)
     },
     showLeftPadding() {
       return (
@@ -128,5 +136,13 @@ export default {
 .toggle-icon {
   width: 35px;
   height: 35px;
+}
+
+.chart-box {
+  @apply .overflow-x-scroll;
+}
+
+.chart {
+  min-width: 800px;
 }
 </style>
