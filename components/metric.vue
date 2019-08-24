@@ -45,7 +45,23 @@
       <div class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
-      <div class="mt-4 py-4 chart-box">
+
+      <div class="mt-4">
+        <div>
+          <SelectableButton
+            v-for="(selectedTerritory, id) in selectedTerritories"
+            :key="id"
+            :metric="index"
+            :text="territories[selectedTerritory]"
+            :value="selectedTerritory"
+            :selected-value="markedTerritoryInYearComparison"
+            :click="markTerritoryInYearComparison"
+            class="mt-3 mr-3"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4 py-4 overflow-x-scroll md:overflow-auto">
         <HorizontalBarChart :chart-data="chartData2" class="chart" />
       </div>
     </div>
@@ -58,6 +74,7 @@ import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
 import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
+import SelectableButton from '@/components/buttons/selectable.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -80,7 +97,8 @@ export default {
     CountUp,
     OpenIcon,
     CloseIcon,
-    HorizontalBarChart
+    HorizontalBarChart,
+    SelectableButton
   },
   props: {
     index: {
@@ -92,7 +110,19 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      selectedYear: 2016,
+      markedTerritoryInYearComparison: null
+    }
+  },
   computed: {
+    territories() {
+      return this.$store.state.metrics.territories
+    },
+    selectedTerritories() {
+      return this.$store.state.metrics.selectedTerritories
+    },
     isMetricOpen() {
       return this.$store.getters['metrics/isMetricOpen'](this.index)
     },
@@ -127,7 +157,14 @@ export default {
     ...mapMutations({
       openMetric: 'metrics/openMetric',
       closeMetric: 'metrics/closeMetric'
-    })
+    }),
+    markTerritoryInYearComparison(territory) {
+      if (this.markedTerritoryInYearComparison === territory) {
+        this.markedTerritoryInYearComparison = null
+      } else {
+        this.markedTerritoryInYearComparison = territory
+      }
+    }
   }
 }
 </script>
@@ -138,11 +175,13 @@ export default {
   height: 35px;
 }
 
-.chart-box {
-  @apply .overflow-x-scroll;
-}
-
 .chart {
   min-width: 800px;
+}
+
+@screen md {
+  .chart {
+    min-width: 0;
+  }
 }
 </style>

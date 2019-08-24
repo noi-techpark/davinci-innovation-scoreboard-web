@@ -1,7 +1,5 @@
 import pattern from 'patternomaly'
 
-// import Dash from './dash'
-
 export const state = () => ({
   territories: {
     IT: 'Italy',
@@ -346,28 +344,6 @@ export const state = () => ({
   ],
   openMetric: null
 })
-
-// const shapes = {
-//   dash: Dash
-// }
-
-// function draw(shapeType = 'square', backgroundColor, patternColor, size) {
-//   const patternCanvas = document.createElement('canvas')
-//   const patternContext = patternCanvas.getContext('2d')
-//   const outerSize = size * 2
-
-//   const Shape = shapes[shapeType]
-//   const shape = new Shape(size, backgroundColor, patternColor)
-
-//   const pattern = patternContext.createPattern(shape.drawTile(), 'repeat')
-
-//   patternCanvas.width = outerSize
-//   patternCanvas.height = outerSize
-
-//   pattern.shapeType = shapeType
-
-//   return pattern
-// }
 
 function generateChartLabels(territories, selectedTerritories) {
   return selectedTerritories.map((id) => {
