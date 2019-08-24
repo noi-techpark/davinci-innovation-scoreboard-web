@@ -1,12 +1,12 @@
 <template>
   <div class="my-5 flex flex-wrap">
-    <div
-      class="title-box w-full flex flex-col justify-end p-4 border-3 border-black"
-    >
-      <div
-        class="leading-tight font-thin text-4xl md:text-6xl lg:text-7xl uppercase"
-      >
-        All Statistical Innovation Data for South Tyrol
+    <div class="title-container w-full flex flex-col">
+      <div class="title-box my-4 mr-6">
+        <div
+          class="px-4 py-2 title-text leading-tight font-thin text-4xl md:text-6xl lg:text-7xl text-black uppercase"
+        >
+          All Statistical Innovation Data for South Tyrol
+        </div>
       </div>
     </div>
     <Metric
@@ -35,7 +35,28 @@ export default {
 </script>
 
 <style scoped>
-.title-box {
+.title-container {
   min-height: 400px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/title-mobile.jpg');
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url('/title-mobile@2x.jpg');
+  }
+
+  @screen lg {
+    background-image: url('/title-desktop.jpg');
+
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url('/title-desktop@2x.jpg');
+    }
+  }
+}
+
+.title-box {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 </style>

@@ -27,7 +27,11 @@ export default {
                   drawBorder: false
                 },
                 ticks: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  fontColor: '#000',
+                  fontFamily: '"Source Sans Pro", sans-serif',
+                  fontSize: 15,
+                  padding: 10
                 },
                 stacked: true
               }
@@ -37,6 +41,12 @@ export default {
                 gridLines: {
                   display: false,
                   drawBorder: false
+                },
+                ticks: {
+                  fontColor: '#000',
+                  fontFamily: '"Source Sans Pro", sans-serif',
+                  fontSize: 15,
+                  padding: 10
                 },
                 stacked: true
               }
