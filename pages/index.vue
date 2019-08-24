@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5 flex flex-wrap">
+  <div class="my-5">
     <div class="title-container w-full flex flex-col">
       <div class="title-box my-4 mr-6">
         <div
@@ -9,12 +9,15 @@
         </div>
       </div>
     </div>
-    <Metric
-      v-for="(metric, index) in metrics"
-      :key="index"
-      :index="index"
-      :metric="metric"
-    />
+
+    <div v-if="loaded" class="flex flex-wrap">
+      <Metric
+        v-for="(metric, index) in metrics"
+        :key="index"
+        :index="index"
+        :metric="metric"
+      />
+    </div>
   </div>
 </template>
 
@@ -27,9 +30,15 @@ export default {
     Metric
   },
   computed: {
+    loaded() {
+      return this.$store.state.metrics.loaded
+    },
     metrics() {
       return this.$store.state.metrics.list
     }
+  },
+  fetch({ store }) {
+    return store.dispatch('metrics/load')
   }
 }
 </script>
