@@ -15,15 +15,14 @@ export default {
       type: String,
       required: true
     },
-    metric: {
-      type: Number,
-      required: true
-    },
     value: {
       type: String,
       required: true
     },
     selectedValue: {
+      type: String
+    },
+    selectedColor: {
       type: String,
       required: true
     },
@@ -40,12 +39,12 @@ export default {
       const styleNotSeleted =
         'border-black hover:bg-black text-black hover:text-white'
       const styleSelected =
-        'border-metric' +
-        this.metric +
-        '-500 hover:bg-metric' +
-        this.metric +
-        '-500 text-metric' +
-        this.metric +
+        'border-' +
+        this.selectedColor +
+        '-500 hover:bg-' +
+        this.selectedColor +
+        '-500 text-' +
+        this.selectedColor +
         '-500 hover:text-white'
 
       return {

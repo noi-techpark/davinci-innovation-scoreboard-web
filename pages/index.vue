@@ -34,7 +34,7 @@ export default {
       return this.$store.state.metrics.loaded
     },
     metrics() {
-      return this.$store.state.metrics.list
+      return this.$store.state.metrics.metrics
     }
   },
   fetch({ store }) {

@@ -46,24 +46,11 @@
         {{ metric.description }}
       </div>
 
-      <div class="mt-4">
-        <div>
-          <SelectableButton
-            v-for="(selectedTerritory, id) in selectedTerritories"
-            :key="id"
-            :metric="index"
-            :text="territories[selectedTerritory]"
-            :value="selectedTerritory"
-            :selected-value="markedTerritoryInYearComparison"
-            :click="markTerritoryInYearComparison"
-            class="mt-3 mr-3"
-          />
-        </div>
-      </div>
+      <YearComparison :index="index" :metric="metric" class="my-4" />
 
-      <div class="mt-4 py-4 overflow-x-scroll md:overflow-auto">
+      <!-- <div class="mt-4 py-4 overflow-x-scroll md:overflow-auto">
         <HorizontalBarChart :chart-data="chartData2" class="chart" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -73,8 +60,8 @@ import { mapMutations } from 'vuex'
 import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
-import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
-import SelectableButton from '@/components/buttons/selectable.vue'
+import YearComparison from '@/components/comparisons/year.vue'
+// import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -97,8 +84,8 @@ export default {
     CountUp,
     OpenIcon,
     CloseIcon,
-    HorizontalBarChart,
-    SelectableButton
+    YearComparison
+    // HorizontalBarChart,
   },
   props: {
     index: {
@@ -112,17 +99,10 @@ export default {
   },
   data() {
     return {
-      selectedYear: 2016,
-      markedTerritoryInYearComparison: null
+      selectedYear: 2016
     }
   },
   computed: {
-    territories() {
-      return this.$store.state.metrics.territories
-    },
-    selectedTerritories() {
-      return this.$store.state.metrics.selectedTerritories
-    },
     isMetricOpen() {
       return this.$store.getters['metrics/isMetricOpen'](this.index)
     },
@@ -157,14 +137,7 @@ export default {
     ...mapMutations({
       openMetric: 'metrics/openMetric',
       closeMetric: 'metrics/closeMetric'
-    }),
-    markTerritoryInYearComparison(territory) {
-      if (this.markedTerritoryInYearComparison === territory) {
-        this.markedTerritoryInYearComparison = null
-      } else {
-        this.markedTerritoryInYearComparison = territory
-      }
-    }
+    })
   }
 }
 </script>
@@ -173,15 +146,5 @@ export default {
 .toggle-icon {
   width: 35px;
   height: 35px;
-}
-
-.chart {
-  min-width: 800px;
-}
-
-@screen md {
-  .chart {
-    min-width: 0;
-  }
 }
 </style>

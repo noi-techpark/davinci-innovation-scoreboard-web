@@ -3,11 +3,11 @@ import territories from '@/meta/territories'
 import metrics from '@/meta/metrics'
 
 export const state = () => ({
+  loaded: false,
   territories,
   // selectedTerritories: ['IT', 'ITD', 'ITD1', 'ITD2', 'ITD3', 'ITC4'],
   selectedTerritories: ['IT', 'ITD1', 'ITD2', 'ITC4'],
-  list: metrics,
-  loaded: false,
+  metrics,
   openMetric: null
 })
 
@@ -48,6 +48,19 @@ export const state = () => ({
 export const getters = {
   isMetricOpen: (state) => (index) => {
     return state.openMetric === index
+  },
+  getData: (state) => (index) => {
+    return state.metrics[index].data
+  },
+  getYears: (state) => (index) => {
+    const data = state.metrics[index].data
+
+    return data[Object.keys(data)[0]].map((year) => {
+      return year.year
+    })
+  },
+  getTerritoryLabel: (state) => (territory) => {
+    return state.territories[territory]
   }
   // getChartData2: (state) => (index) => {
   //   return {
@@ -69,7 +82,7 @@ export const mutations = {
     state.loaded = true
   },
   metricLoaded(state, { id, data }) {
-    state.list.forEach((metric) => {
+    state.metrics.forEach((metric) => {
       if (metric.id !== id) return
 
       metric.data = data
