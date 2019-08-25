@@ -20,7 +20,8 @@ export default {
       required: true
     },
     selectedValue: {
-      type: String
+      type: String,
+      default: null
     },
     selectedColor: {
       type: String,

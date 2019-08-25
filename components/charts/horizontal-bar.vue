@@ -1,4 +1,5 @@
 <script>
+import { AXES_FONT_FAMILY, AXES_FONT_COLOR, AXES_FONT_SIZE, AXES_PADDING } from '@/components/charts/config'
 import { HorizontalBar, mixins } from 'vue-chartjs'
 const { reactiveProp } = mixins
 
@@ -28,10 +29,10 @@ export default {
                 },
                 ticks: {
                   beginAtZero: true,
-                  fontColor: '#000',
-                  fontFamily: '"Source Sans Pro", sans-serif',
-                  fontSize: 15,
-                  padding: 10
+                  fontFamily: AXES_FONT_FAMILY,
+                  fontColor: AXES_FONT_COLOR,
+                  fontSize: AXES_FONT_SIZE,
+                  padding: AXES_PADDING
                 },
                 stacked: true
               }
@@ -43,10 +44,10 @@ export default {
                   drawBorder: false
                 },
                 ticks: {
-                  fontColor: '#000',
-                  fontFamily: '"Source Sans Pro", sans-serif',
-                  fontSize: 15,
-                  padding: 10
+                  fontFamily: AXES_FONT_FAMILY,
+                  fontColor: AXES_FONT_COLOR,
+                  fontSize: AXES_FONT_SIZE,
+                  padding: AXES_PADDING
                 },
                 stacked: true
               }

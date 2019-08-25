@@ -6,9 +6,9 @@
         :key="id"
         :text="territories[selectedTerritory]"
         :value="selectedTerritory"
-        :selected-value="markedTerritoryInYearComparison"
+        :selected-value="markedTerritory"
         :selected-color="metric.id"
-        :click="markTerritoryInYearComparison"
+        :click="markTerritory"
         class="mt-3 mr-3"
       />
     </div>
@@ -22,6 +22,10 @@
 <script>
 import SelectableButton from '@/components/buttons/selectable.vue'
 import LineChart from '@/components/charts/line.vue'
+import {
+  LINE_COLOR_NORMAL,
+  LINE_COLOR_METRICS
+} from '@/components/charts/config'
 
 export default {
   components: {
@@ -40,7 +44,7 @@ export default {
   },
   data() {
     return {
-      markedTerritoryInYearComparison: null
+      markedTerritory: null
     }
   },
   computed: {
@@ -50,22 +54,47 @@ export default {
     selectedTerritories() {
       return this.$store.state.metrics.selectedTerritories
     },
+    hasMarkedTerritory() {
+      return this.markedTerritory !== null
+    },
     data() {
       const data = this.$store.getters['metrics/getData'](this.index)
       const years = this.$store.getters['metrics/getYears'](this.index)
 
       const datasets = this.$store.state.metrics.selectedTerritories.map(
         (territory) => {
+          const color = this.isTerritoryMarked(territory)
+            ? LINE_COLOR_METRICS[this.metric.id]
+            : LINE_COLOR_NORMAL
+
           return {
             data: years.map((year) => {
               return data[territory].find((item) => {
                 return item.year === year
               }).total
             }),
-            label: this.$store.getters['metrics/getTerritoryLabel'](territory)
+            label: this.$store.getters['metrics/getTerritoryLabel'](territory),
+            fill: false,
+            borderColor: color,
+            pointStyle: 'rect',
+            pointRadius: 8,
+            pointHoverRadius: 10,
+            pointBackgroundColor: color,
+            pointBorderColor: color
           }
         }
       )
+
+      if (this.hasMarkedTerritory) {
+        const markedTerritoryIndex = this.selectedTerritories.indexOf(
+          this.markedTerritory
+        )
+        const markedDataset = datasets[markedTerritoryIndex]
+
+        datasets.splice(markedTerritoryIndex, 1)
+
+        datasets.unshift(markedDataset)
+      }
 
       return {
         labels: years,
@@ -74,11 +103,14 @@ export default {
     }
   },
   methods: {
-    markTerritoryInYearComparison(territory) {
-      if (this.markedTerritoryInYearComparison === territory) {
-        this.markedTerritoryInYearComparison = null
+    isTerritoryMarked(territory) {
+      return this.markedTerritory === territory
+    },
+    markTerritory(territory) {
+      if (this.isTerritoryMarked(territory)) {
+        this.markedTerritory = null
       } else {
-        this.markedTerritoryInYearComparison = territory
+        this.markedTerritory = territory
       }
     }
   }

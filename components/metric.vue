@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-between py-2 border-b border-gray-500 ">
       <div
-        class="mb-1 leading-none font-light text-5xl sm:text-6xl md:text-8xl "
+        class="mb-1 leading-none font-light text-5xl sm:text-6xl md:text-8xl"
         :class="['text-metric' + index + '-500']"
       >
         <CountUp :number="metric.value" :suffix="metric.unit" />

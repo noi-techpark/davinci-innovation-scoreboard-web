@@ -1,5 +1,11 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
+import {
+  AXES_FONT_FAMILY,
+  AXES_FONT_COLOR,
+  AXES_FONT_SIZE,
+  AXES_PADDING
+} from '@/components/charts/config'
 const { reactiveProp } = mixins
 
 export default {
@@ -28,10 +34,10 @@ export default {
                 },
                 ticks: {
                   beginAtZero: true,
-                  fontColor: '#000',
-                  fontFamily: '"Source Sans Pro", sans-serif',
-                  fontSize: 15,
-                  padding: 10
+                  fontColor: AXES_FONT_COLOR,
+                  fontFamily: AXES_FONT_FAMILY,
+                  fontSize: AXES_FONT_SIZE,
+                  padding: AXES_PADDING
                 }
               }
             ],
@@ -42,10 +48,10 @@ export default {
                   drawBorder: false
                 },
                 ticks: {
-                  fontColor: '#000',
-                  fontFamily: '"Source Sans Pro", sans-serif',
-                  fontSize: 15,
-                  padding: 10
+                  fontColor: AXES_FONT_COLOR,
+                  fontFamily: AXES_FONT_FAMILY,
+                  fontSize: AXES_FONT_SIZE,
+                  padding: AXES_PADDING
                 }
               }
             ]
