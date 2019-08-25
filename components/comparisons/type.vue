@@ -14,14 +14,14 @@
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
-      <LineChart :chart-data="data" class="chart" />
+      <HorizontalBarChart :chart-data="data" class="chart" />
     </div>
   </div>
 </template>
 
 <script>
 import SelectableButton from '@/components/buttons/selectable.vue'
-import LineChart from '@/components/charts/line.vue'
+import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 import {
   LINE_COLOR_NORMAL,
   LINE_COLOR_METRICS
@@ -30,7 +30,7 @@ import {
 export default {
   components: {
     SelectableButton,
-    LineChart
+    HorizontalBarChart
   },
   props: {
     index: {

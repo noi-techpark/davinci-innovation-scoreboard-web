@@ -1,6 +1,11 @@
 <script>
-import { AXES_FONT_FAMILY, AXES_FONT_COLOR, AXES_FONT_SIZE, AXES_PADDING } from '@/components/charts/config'
 import { HorizontalBar, mixins } from 'vue-chartjs'
+import {
+  AXES_FONT_FAMILY,
+  AXES_FONT_COLOR,
+  AXES_FONT_SIZE,
+  AXES_PADDING
+} from '@/components/charts/config'
 const { reactiveProp } = mixins
 
 export default {

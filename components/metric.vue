@@ -41,16 +41,18 @@
         </button>
       </div>
     </div>
-    <div v-if="isMetricOpen" class="mt-3">
+    <div v-if="isMetricOpen" class="mt-3 mb-5">
       <div class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
 
-      <YearComparison :index="index" :metric="metric" class="my-4" />
+      <YearComparison
+        :index="index"
+        :metric="metric"
+        class="mt-5 pb-5 border-b border-gray-400"
+      />
 
-      <!-- <div class="mt-4 py-4 overflow-x-scroll md:overflow-auto">
-        <HorizontalBarChart :chart-data="chartData2" class="chart" />
-      </div> -->
+      <TypeComparison :index="index" :metric="metric" class="mt-5" />
     </div>
   </div>
 </template>
@@ -61,7 +63,7 @@ import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
 import YearComparison from '@/components/comparisons/year.vue'
-// import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
+import TypeComparison from '@/components/comparisons/type.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -84,8 +86,8 @@ export default {
     CountUp,
     OpenIcon,
     CloseIcon,
-    YearComparison
-    // HorizontalBarChart,
+    YearComparison,
+    TypeComparison
   },
   props: {
     index: {
