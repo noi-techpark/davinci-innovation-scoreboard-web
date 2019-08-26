@@ -14,30 +14,11 @@
         />
       </div>
 
-      <div class="relative">
-        <select
-          class="block appearance-none w-full text-black py-3 px-4 leading-tight text-xl focus:outline-none"
-          style="padding-right: 2.5rem"
-          @change="changeYear"
-        >
-          <option v-for="year in years" :key="year" :value="year">{{
-            year
-          }}</option>
-        </select>
-        <div
-          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black"
-        >
-          <svg
-            class="fill-current h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </div>
-      </div>
+      <SelectYear
+        :years="years"
+        :selected-year="selectedYear"
+        :select-year="selectYear"
+      />
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
@@ -49,6 +30,7 @@
 <script>
 import pattern from 'patternomaly'
 import SelectableButton from '@/components/buttons/selectable.vue'
+import SelectYear from '@/components/select-year.vue'
 import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 import {
   DATASET_COLOR_NORMAL,
@@ -60,6 +42,7 @@ import {
 export default {
   components: {
     SelectableButton,
+    SelectYear,
     HorizontalBarChart
   },
   props: {
@@ -176,9 +159,6 @@ export default {
       } else {
         this.markedGroup = group
       }
-    },
-    changeYear(e) {
-      this.selectYear(e.target.value)
     }
   }
 }

@@ -1,16 +1,20 @@
 <template>
   <div>
-    <div>
-      <SelectableButton
-        v-for="(selectedTerritory, id) in selectedTerritories"
-        :key="id"
-        :text="territories[selectedTerritory]"
-        :value="selectedTerritory"
-        :selected-value="markedTerritory"
-        :selected-color="metric.id"
-        :click="markTerritory"
-        class="mt-3 mr-3"
-      />
+    <div class="flex justify-between items-center">
+      <div>
+        <SelectableButton
+          v-for="(selectedTerritory, id) in selectedTerritories"
+          :key="id"
+          :text="territories[selectedTerritory]"
+          :value="selectedTerritory"
+          :selected-value="markedTerritory"
+          :selected-color="metric.id"
+          :click="markTerritory"
+          class="mt-3 mr-3"
+        />
+      </div>
+
+      <SelectTerritories />
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
@@ -21,7 +25,9 @@
 
 <script>
 import SelectableButton from '@/components/buttons/selectable.vue'
+import SelectTerritories from '@/components/select-territories.vue'
 import LineChart from '@/components/charts/line.vue'
+
 import {
   DATASET_COLOR_NORMAL,
   DATASET_COLOR_METRICS
@@ -30,6 +36,7 @@ import {
 export default {
   components: {
     SelectableButton,
+    SelectTerritories,
     LineChart
   },
   props: {
@@ -114,7 +121,9 @@ export default {
       } else {
         this.markedTerritory = territory
       }
-    }
+    },
+    openTerritoriesSelection() {},
+    closeTerritoriesSelection() {}
   }
 }
 </script>

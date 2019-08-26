@@ -41,7 +41,7 @@
         </button>
       </div>
     </div>
-    <div v-if="isMetricOpen" class="mt-3 mb-5">
+    <div v-if="isMetricOpen" class="mt-3 mb-2">
       <div class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
@@ -60,7 +60,7 @@
         :metric="metric"
         :selected-year="selectedYear"
         :select-year="selectYear"
-        class="mt-5"
+        class="mt-5 pb-5 border-b border-gray-400"
       />
     </div>
   </div>
@@ -112,7 +112,7 @@ export default {
     const years = this.$store.getters['metrics/getYears'](this.index)
 
     return {
-      selectedYear: years[years.length - 1]
+      selectedYear: years[0]
     }
   },
   computed: {

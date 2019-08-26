@@ -20,7 +20,8 @@ export default {
   css: [],
   plugins: [
     '~/plugins/axios',
-    '~/plugins/filters'
+    '~/plugins/filters',
+    '~/plugins/portal',
   ],
   devModules: [
     '@nuxtjs/eslint-module',
