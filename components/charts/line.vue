@@ -25,6 +25,20 @@ export default {
           legend: {
             display: false
           },
+          tooltips: {
+            callbacks: {
+              label(tooltipItems, data) {
+                const dataset = data.datasets[tooltipItems.datasetIndex]
+                const value = dataset.data[tooltipItems.index]
+                const label =
+                  dataset.label === undefined
+                    ? data.labels[tooltipItems.index]
+                    : dataset.label
+
+                return label + ': ' + value.toLocaleString('de-DE')
+              }
+            }
+          },
           scales: {
             xAxes: [
               {
@@ -51,7 +65,10 @@ export default {
                   fontColor: AXES_FONT_COLOR,
                   fontFamily: AXES_FONT_FAMILY,
                   fontSize: AXES_FONT_SIZE,
-                  padding: AXES_PADDING
+                  padding: AXES_PADDING,
+                  callback(value, index, values) {
+                    return value.toLocaleString('de-DE')
+                  }
                 }
               }
             ]

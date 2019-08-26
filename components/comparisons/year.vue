@@ -23,8 +23,8 @@
 import SelectableButton from '@/components/buttons/selectable.vue'
 import LineChart from '@/components/charts/line.vue'
 import {
-  LINE_COLOR_NORMAL,
-  LINE_COLOR_METRICS
+  DATASET_COLOR_NORMAL,
+  DATASET_COLOR_METRICS
 } from '@/components/charts/config'
 
 export default {
@@ -64,8 +64,8 @@ export default {
       const datasets = this.$store.state.metrics.selectedTerritories.map(
         (territory) => {
           const color = this.isTerritoryMarked(territory)
-            ? LINE_COLOR_METRICS[this.metric.id]
-            : LINE_COLOR_NORMAL
+            ? DATASET_COLOR_METRICS[this.metric.id]
+            : DATASET_COLOR_NORMAL
 
           return {
             data: years.map((year) => {
@@ -80,7 +80,9 @@ export default {
             pointRadius: 8,
             pointHoverRadius: 10,
             pointBackgroundColor: color,
-            pointBorderColor: color
+            pointHoverBackgroundColor: color,
+            pointBorderColor: color,
+            pointHoverBorderColor: color
           }
         }
       )

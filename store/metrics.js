@@ -54,9 +54,15 @@ export const getters = {
   getYears: (state) => (index) => {
     const data = state.metrics[index].data
 
-    return data[Object.keys(data)[0]].map((year) => {
-      return year.year
-    })
+    if (data === undefined) return []
+
+    return data[Object.keys(data)[0]]
+      .sort((yearA, yearB) => {
+        return parseInt(yearB.year) - parseInt(yearA.year)
+      })
+      .map((year) => {
+        return year.year
+      })
   },
   getTerritoryLabel: (state) => (territory) => {
     return state.territories[territory]

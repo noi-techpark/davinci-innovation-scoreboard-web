@@ -5,7 +5,19 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Innovation in companies with at least 10 persons employed',
-    unit: ''
+    unit: '',
+    groups: [
+      {
+        id: 'FORMA_INNOVAZ',
+        name: 'type of innovation',
+        values: {
+          PTCON: 'product and/or process innovation activities (only)',
+          OMKON: 'organisation and/or marketing innovations (only)',
+          PTCOMK:
+            'product/process innovation activities and  organisation/marketing innovations'
+        }
+      }
+    ]
   },
   {
     id: 'metric1',

@@ -55,7 +55,13 @@
         class="mt-5 pb-5 border-b border-gray-400"
       />
 
-      <TypeComparison :index="index" :metric="metric" class="mt-5" />
+      <GroupComparison
+        :index="index"
+        :metric="metric"
+        :selected-year="selectedYear"
+        :select-year="selectYear"
+        class="mt-5"
+      />
     </div>
   </div>
 </template>
@@ -66,7 +72,7 @@ import CountUp from '@/components/count-up.vue'
 import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
 import YearComparison from '@/components/comparisons/year.vue'
-import TypeComparison from '@/components/comparisons/type.vue'
+import GroupComparison from '@/components/comparisons/group.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -90,7 +96,7 @@ export default {
     OpenIcon,
     CloseIcon,
     YearComparison,
-    TypeComparison
+    GroupComparison
   },
   props: {
     index: {
@@ -103,8 +109,10 @@ export default {
     }
   },
   data() {
+    const years = this.$store.getters['metrics/getYears'](this.index)
+
     return {
-      selectedYear: 2016
+      selectedYear: years[years.length - 1]
     }
   },
   computed: {
@@ -142,7 +150,10 @@ export default {
     ...mapMutations({
       openMetric: 'metrics/openMetric',
       closeMetric: 'metrics/closeMetric'
-    })
+    }),
+    selectYear(year) {
+      this.selectedYear = year
+    }
   }
 }
 </script>
