@@ -29,7 +29,7 @@
 
 <script>
 import pattern from 'patternomaly'
-import SelectableButton from '@/components/buttons/selectable.vue'
+import SelectableButton from '@/components/selectable-button.vue'
 import SelectYear from '@/components/select-year.vue'
 import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 import {

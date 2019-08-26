@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import SelectableButton from '@/components/buttons/selectable.vue'
+import SelectableButton from '@/components/selectable-button.vue'
 import SelectTerritories from '@/components/select-territories.vue'
 import LineChart from '@/components/charts/line.vue'
 
