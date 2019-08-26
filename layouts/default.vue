@@ -73,11 +73,12 @@
             </div>
           </div>
           <div class="flex-1 order-last xl:order-first flex justify-end">
-            <img
-              src="~/static/davinci.png"
-              alt="Davinci - Big Data"
-              class="image-davinci"
-            />
+            <a href="https://davinci.bz.it"
+              ><img
+                src="~/static/davinci.png"
+                alt="Davinci - Big Data"
+                class="image-davinci"
+            /></a>
           </div>
         </div>
       </div>

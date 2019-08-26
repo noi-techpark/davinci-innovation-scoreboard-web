@@ -5,8 +5,7 @@ import metrics from '@/meta/metrics'
 export const state = () => ({
   loaded: false,
   territories,
-  // selectedTerritories: ['IT', 'ITD', 'ITD1', 'ITD2', 'ITD3', 'ITC4'],
-  selectedTerritories: ['IT', 'ITD1', 'ITD2', 'ITC4'],
+  selectedTerritories: ['IT', 'ITD', 'ITD1', 'ITD2', 'ITD3', 'ITC4'],
   metrics,
   openMetric: null
 })

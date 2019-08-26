@@ -45,6 +45,9 @@
       <div class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
+      <div class="mt-3 text-base sm:text-lg md:text-xl">
+        Source: {{ metric.source }}
+      </div>
 
       <YearComparison
         :index="index"
