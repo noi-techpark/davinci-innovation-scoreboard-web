@@ -23,7 +23,7 @@ export const getters = {
 
     return data[Object.keys(data)[0]]
       .sort((yearA, yearB) => {
-        return parseInt(yearB.year) - parseInt(yearA.year)
+        return parseInt(yearA.year) - parseInt(yearB.year)
       })
       .map((year) => {
         return year.year

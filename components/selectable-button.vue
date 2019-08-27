@@ -38,15 +38,20 @@ export default {
     },
     style() {
       const styleNotSeleted =
-        'border-black hover:bg-black text-black hover:text-white'
+        'border-black hover:border-' +
+        this.selectedColor +
+        '-500 text-black hover:text-' +
+        this.selectedColor +
+        '-500'
+
       const styleSelected =
         'border-' +
         this.selectedColor +
-        '-500 hover:bg-' +
+        '-500 bg-' +
         this.selectedColor +
-        '-500 text-' +
+        '-500 hover:bg-white text-white hover:text-' +
         this.selectedColor +
-        '-500 hover:text-white'
+        '-500'
 
       return {
         [styleNotSeleted]: !this.isSelected,

@@ -112,7 +112,7 @@ export default {
     const years = this.$store.getters['metrics/getYears'](this.index)
 
     return {
-      selectedYear: years[0]
+      selectedYear: years[years.length - 1]
     }
   },
   computed: {
