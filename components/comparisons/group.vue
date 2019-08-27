@@ -22,7 +22,10 @@
       />
     </div>
 
-    <div v-if="!repaint" class="mt-5 pb-2 overflow-x-scroll md:overflow-hidden">
+    <div
+      v-if="!repaintTerritories"
+      class="mt-5 pb-2 overflow-x-scroll md:overflow-hidden"
+    >
       <HorizontalBarChart
         :chart-data="data"
         class="chart"
@@ -88,8 +91,8 @@ export default {
     }
   },
   computed: {
-    repaint() {
-      return this.$store.state.metrics.repaint
+    repaintTerritories() {
+      return this.$store.state.metrics.repaint.territories
     },
     territories() {
       return this.$store.state.metrics.territories

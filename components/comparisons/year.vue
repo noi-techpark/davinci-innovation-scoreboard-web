@@ -18,7 +18,7 @@
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
-      <LineChart :chart-data="data" class="chart" />
+      <LineChart :chart-data="data" class="chart" :y-axix-unit="metric.unit" />
     </div>
   </div>
 </template>
