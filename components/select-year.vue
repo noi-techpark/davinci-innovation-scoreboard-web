@@ -1,7 +1,7 @@
 <template>
-  <div class="relative">
+  <div class="relative text-black hover:text-gray-500">
     <select
-      class="block appearance-none w-full text-black py-3 px-4 leading-tight text-xl focus:outline-none"
+      class="block appearance-none w-full py-3 px-4 leading-tight text-xl focus:outline-none cursor-pointer"
       style="padding-right: 2.5rem"
       :value="selectedYear"
       @change="change"
@@ -11,7 +11,7 @@
       }}</option>
     </select>
     <div
-      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black"
+      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
     >
       <svg
         class="fill-current h-4 w-4"

@@ -1,4 +1,3 @@
-// import pattern from 'patternomaly'
 import territories from '@/meta/territories'
 import metrics from '@/meta/metrics'
 
@@ -9,40 +8,6 @@ export const state = () => ({
   metrics,
   openMetric: null
 })
-
-// function generateChartLabels(territories, selectedTerritories) {
-//   return selectedTerritories.map((id) => {
-//     return territories[id].toUpperCase()
-//   })
-// }
-
-// function generateDatasetForChart2(
-//   dataByTerritory,
-//   selectedTerritories,
-//   selectedYear
-// ) {
-//   return [
-//     {
-//       data: selectedTerritories.map((id) => {
-//         const group = dataByTerritory.stats[id].find((group) => {
-//           return group.group.FORMA_INNOVAZ === 'ALL'
-//         })
-
-//         return group.values[selectedYear]
-//       }),
-//       borderWidth: 0,
-//       backgroundColor: [
-//         pattern.draw('disc', '#FFF', '#000', 15),
-//         pattern.draw('disc', '#FFF', '#000', 15),
-//         pattern.draw('disc', '#FFF', '#D5575C', 15),
-//         pattern.draw('disc', '#FFF', '#000', 15),
-//         pattern.draw('disc', '#FFF', '#000', 15),
-//         pattern.draw('disc', '#FFF', '#000', 15)
-//       ]
-//       // label: 'xxx'
-//     }
-//   ]
-// }
 
 export const getters = {
   isMetricOpen: (state) => (index) => {
@@ -67,16 +32,6 @@ export const getters = {
   getTerritoryLabel: (state) => (territory) => {
     return state.territories[territory]
   }
-  // getChartData2: (state) => (index) => {
-  //   return {
-  //     labels: generateChartLabels(state.territories, state.selectedTerritories),
-  //     datasets: generateDatasetForChart2(
-  //       state.list[index].dataByTerritory,
-  //       state.selectedTerritories,
-  //       state.selectedYear
-  //     )
-  //   }
-  // }
 }
 
 export const mutations = {
@@ -115,6 +70,9 @@ export const mutations = {
   },
   closeMetric(state) {
     state.openMetric = null
+  },
+  selectTerritories(state, selectedTerritories) {
+    state.selectedTerritories = selectedTerritories
   }
 }
 

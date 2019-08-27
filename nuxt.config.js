@@ -17,7 +17,9 @@ export default {
     ]
   },
   loading: { color: '#fff' },
-  css: [],
+  css: [
+    '~/css/main.css'
+  ],
   plugins: [
     '~/plugins/axios',
     '~/plugins/filters',

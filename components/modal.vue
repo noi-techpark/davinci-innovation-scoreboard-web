@@ -4,8 +4,8 @@
 
     <portal v-if="paint" to="modals">
       <transition name="modal" @after-leave="afterLeave">
-        <div v-show="open" class="modal__mask" @click="closeModal">
-          <div class="modal__container" @click.stop>
+        <div v-show="open" class="modal-mask" @click="closeModal">
+          <div class="modal-container" @click.stop>
             <slot name="modal" :close-modal="closeModal"></slot>
           </div>
         </div>
@@ -38,22 +38,30 @@ export default {
 </script>
 
 <style>
-.modal__mask {
+.modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: opacity 0.3s ease;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-.modal__container {
+.modal-container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
   transition: all 0.3s ease;
+}
+
+@screen lg {
+  .modal-container {
+    width: 1000px;
+  }
 }
 
 .modal-enter {
@@ -64,8 +72,8 @@ export default {
   opacity: 0;
 }
 
-.modal-enter .modal__container,
-.modal-leave-active .modal__container {
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
   transform: scale(1.1);
 }
 </style>

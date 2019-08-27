@@ -27,7 +27,7 @@
           class="hover:text-gray-500"
           @click.prevent="openMetric(index)"
         >
-          <OpenIcon class="toggle-icon fill-current" />
+          <OpenIcon class="icon fill-current" />
           <span class="sr-only">Open metric</span>
         </button>
 
@@ -36,7 +36,7 @@
           class="hover:text-gray-500"
           @click.prevent="closeMetric(index)"
         >
-          <CloseIcon class="toggle-icon fill-current" />
+          <CloseIcon class="icon fill-current" />
           <span class="sr-only">Close metric</span>
         </button>
       </div>
@@ -157,10 +157,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.toggle-icon {
-  width: 35px;
-  height: 35px;
-}
-</style>

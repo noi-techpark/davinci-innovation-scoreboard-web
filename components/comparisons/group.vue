@@ -10,7 +10,7 @@
           :selected-value="markedGroup"
           :selected-color="metric.id"
           :click="markGroup"
-          class="mt-3 mr-3"
+          class="my-1 mr-3"
         />
       </div>
 
@@ -18,6 +18,7 @@
         :years="years"
         :selected-year="selectedYear"
         :select-year="selectYear"
+        class="my-1 flex items-center"
       />
     </div>
 

@@ -10,11 +10,11 @@
           :selected-value="markedTerritory"
           :selected-color="metric.id"
           :click="markTerritory"
-          class="mt-3 mr-3"
+          class="my-1 mr-3"
         />
       </div>
 
-      <SelectTerritories />
+      <SelectTerritories class="my-1 flex items-center" />
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
@@ -62,7 +62,10 @@ export default {
       return this.$store.state.metrics.selectedTerritories
     },
     hasMarkedTerritory() {
-      return this.markedTerritory !== null
+      return (
+        this.markedTerritory !== null &&
+        this.selectedTerritories.includes(this.markedTerritory)
+      )
     },
     data() {
       const data = this.$store.getters['metrics/getData'](this.index)
