@@ -92,7 +92,8 @@ export default {
             pointBackgroundColor: color,
             pointHoverBackgroundColor: color,
             pointBorderColor: color,
-            pointHoverBorderColor: color
+            pointHoverBorderColor: color,
+            lineTension: 0
           }
         }
       )
