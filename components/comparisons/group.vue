@@ -25,6 +25,22 @@
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
       <HorizontalBarChart :chart-data="data" class="chart" />
     </div>
+
+    <div v-if="hasMarkedGroup" class="mt-5 flex flex-wrap">
+      <div
+        v-for="(item, id) in legend"
+        :key="id"
+        class="ml-4 flex items-center font-thin uppercase"
+      >
+        <div
+          class="mr-2 w-3 h-3"
+          :style="{
+            'background-color': item.color
+          }"
+        />
+        {{ item.name }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,12 +53,6 @@ import {
   DATASET_COLOR_METRICS,
   hslToColor
 } from '@/components/charts/config'
-
-function lightenColor(hsl, index, count) {
-  const light = hsl.light + ((100 - hsl.light) / count) * index
-
-  return hslToColor(hsl.hue, hsl.sat, light)
-}
 
 export default {
   components: {
@@ -86,21 +96,38 @@ export default {
     hasMarkedGroup() {
       return this.markedGroup !== null
     },
+    markedGroupDetails() {
+      return this.metric.groups.find((group) => {
+        return group.id === this.markedGroup
+      })
+    },
+    legend() {
+      return Object.entries(this.markedGroupDetails.values).map(
+        (entry, index, entries) => {
+          return {
+            name: entry[1],
+            color: this.lightenColor(
+              DATASET_COLOR_BAR_NORMAL,
+              index,
+              entries.length
+            )
+          }
+        }
+      )
+    },
     data() {
       const data = this.$store.getters['metrics/getData'](this.index)
 
       const territoriesLabels = this.selectedTerritories.map((territory) => {
-        return this.$store.getters['metrics/getTerritoryLabel'](territory)
+        return this.$store.getters['metrics/getTerritoryLabel'](
+          territory
+        ).toUpperCase()
       })
 
       const datasets = []
 
       if (this.hasMarkedGroup) {
-        const group = this.metric.groups.find((group) => {
-          return group.id === this.markedGroup
-        })
-
-        Object.keys(group.values).map((value, i, values) => {
+        Object.keys(this.markedGroupDetails.values).map((value, i, values) => {
           const datasetData = []
           const datasetColor = []
 
@@ -110,7 +137,7 @@ export default {
                 ? DATASET_COLOR_METRICS[this.metric.id]
                 : DATASET_COLOR_BAR_NORMAL
 
-            const color = lightenColor(hsl, i, values.length)
+            const color = this.lightenColor(hsl, i, values.length)
 
             datasetData.push(
               data[id]
@@ -132,7 +159,7 @@ export default {
             hoverBackgroundColor: datasetColor,
             borderColor: datasetColor,
             hoverBorderColor: datasetColor,
-            label: group.values[value]
+            label: this.markedGroupDetails.values[value]
           })
         })
       } else {
@@ -148,8 +175,8 @@ export default {
 
           datasetColor.push(
             id === 'ITD1'
-              ? lightenColor(DATASET_COLOR_METRICS[this.metric.id], 0, 1)
-              : lightenColor(DATASET_COLOR_BAR_NORMAL, 0, 1)
+              ? this.lightenColor(DATASET_COLOR_METRICS[this.metric.id], 0, 1)
+              : this.lightenColor(DATASET_COLOR_BAR_NORMAL, 0, 1)
           )
         })
 
@@ -174,12 +201,16 @@ export default {
       return this.markedGroup === group
     },
     markGroup(group) {
-      console.log(group)
       if (this.isGroupMarked(group)) {
         this.markedGroup = null
       } else {
         this.markedGroup = group
       }
+    },
+    lightenColor(hsl, index, count) {
+      const light = hsl.light + ((100 - hsl.light) / count) * index
+
+      return hslToColor(hsl.hue, hsl.sat, light)
     }
   }
 }

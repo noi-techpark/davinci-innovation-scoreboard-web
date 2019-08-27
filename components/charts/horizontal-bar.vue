@@ -23,14 +23,7 @@ export default {
           responsive: true,
           maintainAspectRatio: false,
           legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              fontFamily: AXES_FONT_FAMILY,
-              fontColor: AXES_FONT_COLOR,
-              fontSize: AXES_FONT_SIZE,
-              padding: AXES_PADDING
-            }
+            display: false
           },
           tooltips: {
             callbacks: {

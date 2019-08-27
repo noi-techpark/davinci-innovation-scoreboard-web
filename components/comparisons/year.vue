@@ -86,7 +86,9 @@ export default {
                 return item.year === year
               }).total
             }),
-            label: this.$store.getters['metrics/getTerritoryLabel'](territory),
+            label: this.$store.getters['metrics/getTerritoryLabel'](
+              territory
+            ).toUpperCase(),
             fill: false,
             borderColor: color,
             pointStyle: 'rect',
