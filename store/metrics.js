@@ -81,36 +81,64 @@ export const actions = {
     try {
       commit('loadingMetrics')
 
-      const response0 = await this.$axios(
+      const request0 = this.$axios(
         '/statistics/enterprises-with-innovation-activities-divided-by-territory'
       )
 
-      const response1 = await this.$axios(
+      const request1 = this.$axios(
         '/statistics/enterprises-that-have-introduced-product-or-process-innovations-divided-by-territory'
       )
 
-      const response2 = await this.$axios(
+      const request2 = this.$axios(
         '/statistics/innovation-expenditure-divided-by-territory'
       )
 
-      const response3 = await this.$axios(
+      const request3 = this.$axios(
         '/statistics/innovation-expenditure-per-number-of-persons-employed-divided-by-territory'
       )
 
-      // const response4 = await this.$axios(
+      // const request4 = this.$axios(
       //   '/statistics/research-and-development-personnel-in-house-divided-by-territory'
       // )
 
-      const response5 = await this.$axios(
+      const request5 = this.$axios(
         '/statistics/domestic-research-and-development-expenditure-in-house-divided-by-territory'
       )
 
-      commit('metricLoaded', { id: 'metric0', data: response0.data.statistics })
-      commit('metricLoaded', { id: 'metric1', data: response1.data.statistics })
-      commit('metricLoaded', { id: 'metric2', data: response2.data.statistics })
-      commit('metricLoaded', { id: 'metric3', data: response3.data.statistics })
-      // commit('metricLoaded', { id: 'metric4', data: response4.data.statistics })
-      commit('metricLoaded', { id: 'metric5', data: response5.data.statistics })
+      const responses = await Promise.all([
+        request0,
+        request1,
+        request2,
+        request3,
+        // request4,
+        request5
+      ])
+
+      commit('metricLoaded', {
+        id: 'metric0',
+        data: responses[0].data.statistics
+      })
+      commit('metricLoaded', {
+        id: 'metric1',
+        data: responses[1].data.statistics
+      })
+      commit('metricLoaded', {
+        id: 'metric2',
+        data: responses[2].data.statistics
+      })
+      commit('metricLoaded', {
+        id: 'metric3',
+        data: responses[3].data.statistics
+      })
+      // commit('metricLoaded', {
+      //   id: 'metric4',
+      //   data: responses[4].data.statistics
+      // })
+      commit('metricLoaded', {
+        id: 'metric5',
+        data: responses[4].data.statistics
+        // data: responses[5].data.statistics
+      })
       commit('metricFaceLoaded', { id: 'metric4' })
       // commit('metricFaceLoaded', { id: 'metric5' })
 
