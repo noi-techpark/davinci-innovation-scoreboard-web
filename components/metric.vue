@@ -16,7 +16,7 @@
     <div class="flex justify-between py-2 border-b border-gray-500 ">
       <div
         class="mb-1 leading-none font-light text-5xl sm:text-6xl md:text-8xl"
-        :class="['text-metric' + index + '-500']"
+        :class="['text-' + metric.id + '-500']"
       >
         <CountUp :number="metric.value" :suffix="metric.unit" />
       </div>
@@ -121,9 +121,6 @@ export default {
     },
     isMetricClose() {
       return !this.$store.getters['metrics/isMetricOpen'](this.index)
-    },
-    chartData2() {
-      return this.$store.getters['metrics/getChartData2'](this.index)
     },
     showLeftPadding() {
       return (
