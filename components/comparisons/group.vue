@@ -22,15 +22,19 @@
       />
     </div>
 
-    <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
-      <HorizontalBarChart :chart-data="data" class="chart" />
+    <div v-if="!repaint" class="mt-5 pb-2 overflow-x-scroll md:overflow-hidden">
+      <HorizontalBarChart
+        :chart-data="data"
+        class="chart"
+        :style="{ height: data.datasets[0].data.length * 80 + 'px' }"
+      />
     </div>
 
     <div v-if="hasMarkedGroup" class="mt-5 flex flex-wrap">
       <div
         v-for="(item, id) in legend"
         :key="id"
-        class="ml-4 flex items-center font-thin uppercase"
+        class="ml-4 mb-2 flex items-center font-thin uppercase"
       >
         <div
           class="mr-2 w-3 h-3"
@@ -84,6 +88,9 @@ export default {
     }
   },
   computed: {
+    repaint() {
+      return this.$store.state.metrics.repaint
+    },
     territories() {
       return this.$store.state.metrics.territories
     },

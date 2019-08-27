@@ -35,8 +35,11 @@
             v-model="selectedTerritories[id]"
             type="checkbox"
             :disabled="id === 'ITD1'"
+            class="cursor-pointer"
           />
-          <label :for="'territory' + id" class="ml-2">{{ territory }}</label>
+          <label :for="'territory' + id" class="ml-2 cursor-pointer">{{
+            territory
+          }}</label>
         </div>
       </div>
 
@@ -64,7 +67,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 import Modal from '@/components/modal.vue'
 import ConfigIcon from '@/components/icons/config.vue'
 import ExitIcon from '@/components/icons/exit.vue'
@@ -106,7 +109,7 @@ export default {
 
       this.selectTerritories(selectTerritories)
     },
-    ...mapMutations({
+    ...mapActions({
       selectTerritories: 'metrics/selectTerritories'
     })
   }
@@ -122,7 +125,6 @@ export default {
 @screen lg {
   .content {
     height: auto;
-    /* overflow-y: auto; */
   }
 }
 </style>

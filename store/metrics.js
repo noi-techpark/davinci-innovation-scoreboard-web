@@ -1,8 +1,10 @@
+import Vue from 'vue'
 import territories from '@/meta/territories'
 import metrics from '@/meta/metrics'
 
 export const state = () => ({
   loaded: false,
+  repaint: false,
   territories,
   selectedTerritories: ['IT', 'ITD', 'ITD1', 'ITD2', 'ITD3', 'ITC4'],
   metrics,
@@ -64,6 +66,12 @@ export const mutations = {
 
       metric.value = 1234
     })
+  },
+  startRepaint(state) {
+    state.repaint = true
+  },
+  finishRepaint(state) {
+    state.repaint = false
   },
   openMetric(state, index) {
     state.openMetric = index
@@ -144,5 +152,13 @@ export const actions = {
 
       commit('metricsLoaded')
     } catch (e) {}
+  },
+  selectTerritories({ commit }, selectedTerritories) {
+    commit('selectTerritories', selectedTerritories)
+    commit('startRepaint')
+
+    Vue.nextTick(() => {
+      commit('finishRepaint')
+    })
   }
 }
