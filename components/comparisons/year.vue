@@ -18,7 +18,7 @@
     </div>
 
     <div class="mt-5 pb-2 overflow-x-scroll md:overflow-auto">
-      <LineChart :chart-data="data" class="chart" :y-axix-unit="metric.unit" />
+      <YearChart :chart-data="data" class="chart" :y-axix-unit="metric.unit" />
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@
 <script>
 import SelectableButton from '@/components/selectable-button.vue'
 import SelectTerritories from '@/components/select-territories.vue'
-import LineChart from '@/components/charts/line.vue'
+import YearChart from '@/components/charts/year.vue'
 
 import {
   DATASET_COLOR_LINE_NORMAL,
@@ -38,7 +38,7 @@ export default {
   components: {
     SelectableButton,
     SelectTerritories,
-    LineChart
+    YearChart
   },
   props: {
     index: {

@@ -26,7 +26,7 @@
       v-if="!repaintTerritories"
       class="mt-5 pb-2 overflow-x-scroll md:overflow-hidden"
     >
-      <HorizontalBarChart
+      <GroupChart
         :chart-data="data"
         class="chart"
         :style="{ height: data.datasets[0].data.length * 80 + 'px' }"
@@ -54,7 +54,7 @@
 <script>
 import SelectableButton from '@/components/selectable-button.vue'
 import SelectYear from '@/components/select-year.vue'
-import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
+import GroupChart from '@/components/charts/group.vue'
 import {
   DATASET_COLOR_BAR_NORMAL,
   DATASET_COLOR_METRICS,
@@ -65,7 +65,7 @@ export default {
   components: {
     SelectableButton,
     SelectYear,
-    HorizontalBarChart
+    GroupChart
   },
   props: {
     index: {
