@@ -29,8 +29,9 @@ import SelectTerritories from '@/components/select-territories.vue'
 import LineChart from '@/components/charts/line.vue'
 
 import {
-  DATASET_COLOR_NORMAL,
-  DATASET_COLOR_METRICS
+  DATASET_COLOR_LINE_NORMAL,
+  DATASET_COLOR_METRICS,
+  hslToColor
 } from '@/components/charts/config'
 
 export default {
@@ -73,9 +74,11 @@ export default {
 
       const datasets = this.$store.state.metrics.selectedTerritories.map(
         (territory) => {
-          const color = this.isTerritoryMarked(territory)
+          const hsl = this.isTerritoryMarked(territory)
             ? DATASET_COLOR_METRICS[this.metric.id]
-            : DATASET_COLOR_NORMAL[0]
+            : DATASET_COLOR_LINE_NORMAL
+
+          const color = hslToColor(hsl.hue, hsl.sat, hsl.light)
 
           return {
             data: years.map((year) => {

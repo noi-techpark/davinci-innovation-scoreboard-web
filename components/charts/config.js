@@ -3,22 +3,48 @@ export const AXES_FONT_COLOR = '#000'
 export const AXES_FONT_SIZE = 15
 export const AXES_PADDING = 10
 
-// export const DATASET_COLOR_NORMAL = '#000'
 export const DATASET_COLOR_METRICS = {
-  metric0: '#D5575C',
-  metric1: '#7D9963',
-  metric2: '#F2D20F',
-  metric3: '#98BBD6',
-  metric4: '#A8C038',
-  metric5: '#DF7226'
+  metric0: {
+    hue: 358,
+    sat: 60,
+    light: 59
+  },
+  metric1: {
+    hue: 91,
+    sat: 21,
+    light: 49
+  },
+  metric2: {
+    hue: 52,
+    sat: 90,
+    light: 50
+  },
+  metric3: {
+    hue: 206,
+    sat: 43,
+    light: 72
+  },
+  metric4: {
+    hue: 71,
+    sat: 55,
+    light: 49
+  },
+  metric5: {
+    hue: 25,
+    sat: 74,
+    light: 51
+  }
 }
-export const DATASET_COLOR_NORMAL = [
-  '#000000',
-  '#434343',
-  '#727272',
-  '#959595',
-  '#CBCBCB'
-]
+export const DATASET_COLOR_LINE_NORMAL = {
+  hue: 0,
+  sat: 0,
+  light: 0
+}
+export const DATASET_COLOR_BAR_NORMAL = {
+  hue: 0,
+  sat: 0,
+  light: 0
+}
 export const DATASET_PATTERN_STYLES = [
   'disc',
   'cross',
@@ -27,3 +53,7 @@ export const DATASET_PATTERN_STYLES = [
   'triangle'
 ]
 export const DATASET_PATTERN_SIZE = 15
+
+export function hslToColor(hue, sat, light) {
+  return 'hsl(' + hue + ', ' + sat + '%, ' + light + '%)'
+}

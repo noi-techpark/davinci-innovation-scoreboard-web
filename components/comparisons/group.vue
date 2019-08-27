@@ -33,9 +33,16 @@ import SelectableButton from '@/components/selectable-button.vue'
 import SelectYear from '@/components/select-year.vue'
 import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 import {
-  DATASET_COLOR_NORMAL,
-  DATASET_COLOR_METRICS
+  DATASET_COLOR_BAR_NORMAL,
+  DATASET_COLOR_METRICS,
+  hslToColor
 } from '@/components/charts/config'
+
+function lightenColor(hsl, index, count) {
+  const light = hsl.light + ((100 - hsl.light) / count) * index
+
+  return hslToColor(hsl.hue, hsl.sat, light)
+}
 
 export default {
   components: {
@@ -93,15 +100,17 @@ export default {
           return group.id === this.markedGroup
         })
 
-        Object.keys(group.values).map((value, i) => {
+        Object.keys(group.values).map((value, i, values) => {
           const datasetData = []
-          const datasetBackgroundColor = []
+          const datasetColor = []
 
           this.selectedTerritories.forEach((id) => {
-            const color =
+            const hsl =
               id === 'ITD1'
                 ? DATASET_COLOR_METRICS[this.metric.id]
-                : DATASET_COLOR_NORMAL[i]
+                : DATASET_COLOR_BAR_NORMAL
+
+            const color = lightenColor(hsl, i, values.length)
 
             datasetData.push(
               data[id]
@@ -113,30 +122,44 @@ export default {
                 }).values[value]
             )
 
-            datasetBackgroundColor.push(color)
+            datasetColor.push(color)
           })
 
           datasets.push({
             data: datasetData,
             borderWidth: 0,
-            backgroundColor: datasetBackgroundColor,
-            hoverBackgroundColor: datasetBackgroundColor,
+            backgroundColor: datasetColor,
+            hoverBackgroundColor: datasetColor,
+            borderColor: datasetColor,
+            hoverBorderColor: datasetColor,
             label: group.values[value]
           })
         })
       } else {
-        datasets.push({
-          data: this.selectedTerritories.map((id) => {
-            return data[id].find((year) => {
+        const datasetData = []
+        const datasetColor = []
+
+        this.selectedTerritories.forEach((id) => {
+          datasetData.push(
+            data[id].find((year) => {
               return year.year === this.selectedYear
             }).total
-          }),
+          )
+
+          datasetColor.push(
+            id === 'ITD1'
+              ? lightenColor(DATASET_COLOR_METRICS[this.metric.id], 0, 1)
+              : lightenColor(DATASET_COLOR_BAR_NORMAL, 0, 1)
+          )
+        })
+
+        datasets.push({
+          data: datasetData,
           borderWidth: 0,
-          backgroundColor: this.selectedTerritories.map((id) => {
-            return id === 'ITD1'
-              ? DATASET_COLOR_METRICS[this.metric.id]
-              : DATASET_COLOR_NORMAL[0]
-          })
+          backgroundColor: datasetColor,
+          hoverBackgroundColor: datasetColor,
+          borderColor: datasetColor,
+          hoverBorderColor: datasetColor
         })
       }
 
