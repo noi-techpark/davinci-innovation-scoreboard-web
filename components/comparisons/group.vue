@@ -29,15 +29,12 @@
 </template>
 
 <script>
-import pattern from 'patternomaly'
 import SelectableButton from '@/components/selectable-button.vue'
 import SelectYear from '@/components/select-year.vue'
 import HorizontalBarChart from '@/components/charts/horizontal-bar.vue'
 import {
   DATASET_COLOR_NORMAL,
-  DATASET_COLOR_METRICS,
-  DATASET_PATTERN_STYLES,
-  DATASET_PATTERN_SIZE
+  DATASET_COLOR_METRICS
 } from '@/components/charts/config'
 
 export default {
@@ -97,27 +94,33 @@ export default {
         })
 
         Object.keys(group.values).map((value, i) => {
-          datasets.push({
-            data: this.selectedTerritories.map((id) => {
-              return data[id]
+          const datasetData = []
+          const datasetBackgroundColor = []
+
+          this.selectedTerritories.forEach((id) => {
+            const color =
+              id === 'ITD1'
+                ? DATASET_COLOR_METRICS[this.metric.id]
+                : DATASET_COLOR_NORMAL[i]
+
+            datasetData.push(
+              data[id]
                 .find((year) => {
                   return year.year === this.selectedYear
                 })
                 .groups.find((g) => {
                   return g.id === this.markedGroup
                 }).values[value]
-            }),
+            )
+
+            datasetBackgroundColor.push(color)
+          })
+
+          datasets.push({
+            data: datasetData,
             borderWidth: 0,
-            backgroundColor: this.selectedTerritories.map((id) => {
-              return pattern.draw(
-                DATASET_PATTERN_STYLES[i],
-                '#FFF',
-                id === 'ITD1'
-                  ? DATASET_COLOR_METRICS[this.metric.id]
-                  : DATASET_COLOR_NORMAL,
-                DATASET_PATTERN_SIZE
-              )
-            }),
+            backgroundColor: datasetBackgroundColor,
+            hoverBackgroundColor: datasetBackgroundColor,
             label: group.values[value]
           })
         })
@@ -130,16 +133,10 @@ export default {
           }),
           borderWidth: 0,
           backgroundColor: this.selectedTerritories.map((id) => {
-            return pattern.draw(
-              DATASET_PATTERN_STYLES[0],
-              '#FFF',
-              id === 'ITD1'
-                ? DATASET_COLOR_METRICS[this.metric.id]
-                : DATASET_COLOR_NORMAL,
-              DATASET_PATTERN_SIZE
-            )
+            return id === 'ITD1'
+              ? DATASET_COLOR_METRICS[this.metric.id]
+              : DATASET_COLOR_NORMAL[0]
           })
-          // label: 'xxx'
         })
       }
 

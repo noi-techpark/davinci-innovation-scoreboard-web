@@ -81,16 +81,38 @@ export const actions = {
     try {
       commit('loadingMetrics')
 
-      const response = await this.$axios(
+      const response0 = await this.$axios(
         '/statistics/enterprises-with-innovation-activities-divided-by-territory'
       )
 
-      commit('metricLoaded', { id: 'metric0', data: response.data.statistics })
-      commit('metricFaceLoaded', { id: 'metric1' })
-      commit('metricFaceLoaded', { id: 'metric2' })
-      commit('metricFaceLoaded', { id: 'metric3' })
+      const response1 = await this.$axios(
+        '/statistics/enterprises-that-have-introduced-product-or-process-innovations-divided-by-territory'
+      )
+
+      const response2 = await this.$axios(
+        '/statistics/innovation-expenditure-divided-by-territory'
+      )
+
+      const response3 = await this.$axios(
+        '/statistics/innovation-expenditure-per-number-of-persons-employed-divided-by-territory'
+      )
+
+      // const response4 = await this.$axios(
+      //   '/statistics/research-and-development-personnel-in-house-divided-by-territory'
+      // )
+
+      const response5 = await this.$axios(
+        '/statistics/domestic-research-and-development-expenditure-in-house-divided-by-territory'
+      )
+
+      commit('metricLoaded', { id: 'metric0', data: response0.data.statistics })
+      commit('metricLoaded', { id: 'metric1', data: response1.data.statistics })
+      commit('metricLoaded', { id: 'metric2', data: response2.data.statistics })
+      commit('metricLoaded', { id: 'metric3', data: response3.data.statistics })
+      // commit('metricLoaded', { id: 'metric4', data: response4.data.statistics })
+      commit('metricLoaded', { id: 'metric5', data: response5.data.statistics })
       commit('metricFaceLoaded', { id: 'metric4' })
-      commit('metricFaceLoaded', { id: 'metric5' })
+      // commit('metricFaceLoaded', { id: 'metric5' })
 
       commit('metricsLoaded')
     } catch (e) {}

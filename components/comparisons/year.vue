@@ -75,7 +75,7 @@ export default {
         (territory) => {
           const color = this.isTerritoryMarked(territory)
             ? DATASET_COLOR_METRICS[this.metric.id]
-            : DATASET_COLOR_NORMAL
+            : DATASET_COLOR_NORMAL[0]
 
           return {
             data: years.map((year) => {

@@ -25,7 +25,24 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Innovation in companies with at least 10 persons employed',
-    unit: ''
+    unit: '',
+    groups: [
+      {
+        id: 'FORMA_INNOVAZ',
+        name: 'type of innovation',
+        values: {
+          PTON: 'product innovative enterprises  (only)',
+          PCON: 'process innovative enterprises  (only)',
+          PCPT: 'product and process innovative enterprises',
+          DEV_EN: 'Innovations developed by themselves',
+          DEV_CO:
+            'Innovations developed together with other enterprises or institutions',
+          DEV_AD:
+            'Innovations developed by adapting or modifying goods or services originally devoloped by others',
+          DEV_OT: 'Innovations developed by others'
+        }
+      }
+    ]
   },
   {
     id: 'metric2',
@@ -33,7 +50,8 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Innovation in companies with at least 10 persons employed',
-    unit: '€'
+    unit: '€',
+    groups: []
   },
   {
     id: 'metric3',
@@ -41,7 +59,8 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Innovation in companies with at least 10 persons employed',
-    unit: '€'
+    unit: '€',
+    groups: []
   },
   {
     id: 'metric4',
@@ -49,7 +68,8 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Research and development',
-    unit: ''
+    unit: '',
+    groups: []
   },
   {
     id: 'metric5',
@@ -57,6 +77,18 @@ export default [
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     source: 'ISTAT - Research and development',
-    unit: '€'
+    unit: '€',
+    groups: [
+      {
+        id: 'SETTISTSEC2010',
+        name: 'institution',
+        values: {
+          S20: 'business enterprise sector (excluding private universities)',
+          S16: 'public institutions (excluding public universities)',
+          S22: 'higher education sector (public and private)',
+          S19: 'private non-profit sector'
+        }
+      }
+    ]
   }
 ]
