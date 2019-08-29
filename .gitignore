@@ -4,13 +4,14 @@
 .editorconfig
 
 # Project
-node_modules/
-npm-debug.log*
-.npm
+/node_modules
+/npm-debug.log*
+/.npm
+/.nuxt
+/coverage
+/dist
 logs
 *.log
 .eslintcache
-.nuxt
 sw.*
-dist
 .env
