@@ -62,13 +62,6 @@ export const mutations = {
       metric.value = latest.total
     })
   },
-  metricFaceLoaded(state, { id }) {
-    state.list.forEach((metric) => {
-      if (metric.id !== id) return
-
-      metric.value = 1234
-    })
-  },
   startRepaint(state, part) {
     state.repaint[part] = true
   },
@@ -107,9 +100,9 @@ export const actions = {
         '/statistics/innovation-expenditure-per-number-of-persons-employed-divided-by-territory'
       )
 
-      // const request4 = this.$axios(
-      //   '/statistics/research-and-development-personnel-in-house-divided-by-territory'
-      // )
+      const request4 = this.$axios(
+        '/statistics/research-and-development-personnel-in-house-divided-by-territory'
+      )
 
       const request5 = this.$axios(
         '/statistics/domestic-research-and-development-expenditure-in-house-divided-by-territory'
@@ -120,7 +113,7 @@ export const actions = {
         request1,
         request2,
         request3,
-        // request4,
+        request4,
         request5
       ])
 
@@ -140,17 +133,14 @@ export const actions = {
         id: 'metric3',
         data: responses[3].data.statistics
       })
-      // commit('metricLoaded', {
-      //   id: 'metric4',
-      //   data: responses[4].data.statistics
-      // })
+      commit('metricLoaded', {
+        id: 'metric4',
+        data: responses[4].data.statistics
+      })
       commit('metricLoaded', {
         id: 'metric5',
-        data: responses[4].data.statistics
-        // data: responses[5].data.statistics
+        data: responses[5].data.statistics
       })
-      commit('metricFaceLoaded', { id: 'metric4' })
-      // commit('metricFaceLoaded', { id: 'metric5' })
 
       commit('metricsLoaded')
     } catch (e) {}

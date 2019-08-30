@@ -18,7 +18,11 @@
         class="mb-1 leading-none font-light text-5xl sm:text-6xl md:text-8xl"
         :class="['text-' + metric.id + '-500']"
       >
-        <CountUp :number="metric.value" :suffix="metric.unit" />
+        <CountUp
+          :number="metric.value"
+          :decimal-places="metric.decimalPlaces"
+          :suffix="metric.unit"
+        />
       </div>
 
       <div class="mt-1 flex flex-col justify-center">
@@ -42,7 +46,7 @@
       </div>
     </div>
     <div v-if="isMetricOpen" class="mt-3 mb-2">
-      <div class="text-base sm:text-lg md:text-xl">
+      <div v-if="metric.description" class="text-base sm:text-lg md:text-xl">
         {{ metric.description }}
       </div>
       <div class="mt-3 text-base sm:text-lg md:text-xl">

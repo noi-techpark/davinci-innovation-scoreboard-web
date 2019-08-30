@@ -2,7 +2,7 @@ export default {
   IT: 'Italy',
   ITC: 'Italy Nord-ovest',
   ITD: 'Italy Nord-est',
-  ITE: 'Italy Centro (I)',
+  ITE: 'Italy Centro',
   ITF: 'Italy Sud',
   ITG: 'Italy Isole',
   ITC1: 'Piemonte',

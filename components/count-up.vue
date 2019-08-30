@@ -11,6 +11,10 @@ export default {
       type: Number,
       default: 0
     },
+    decimalPlaces: {
+      type: Number,
+      default: 0
+    },
     suffix: {
       type: String,
       default: ''
@@ -21,6 +25,7 @@ export default {
       duration: 3,
       separator: '.',
       decimal: ',',
+      decimalPlaces: this.decimalPlaces,
       suffix: ' ' + this.suffix,
       useEasing: true,
       easingFn: (t, b, c, d) => {
