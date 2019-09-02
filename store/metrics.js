@@ -17,11 +17,11 @@ export const getters = {
   isMetricOpen: (state) => (index) => {
     return state.openMetric === index
   },
-  getData: (state) => (index) => {
-    return state.metrics[index].data
+  getDataByTerritory: (state) => (index) => {
+    return state.metrics[index].dataByTerritory
   },
   getYears: (state) => (index) => {
-    const data = state.metrics[index].data
+    const data = state.metrics[index].dataByTerritory
 
     if (data === undefined) return []
 
@@ -49,7 +49,7 @@ export const mutations = {
     state.metrics.forEach((metric) => {
       if (metric.id !== id) return
 
-      metric.data = data
+      metric.dataByTerritory = data
 
       const latest = data.ITD1.reduce((previousValue, currentValue) => {
         if (parseInt(previousValue.year) > parseInt(currentValue.year)) {

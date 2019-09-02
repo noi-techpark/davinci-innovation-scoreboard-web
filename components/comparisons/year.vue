@@ -69,7 +69,7 @@ export default {
       )
     },
     data() {
-      const data = this.$store.getters['metrics/getData'](this.index)
+      const data = this.$store.getters['metrics/getDataByTerritory'](this.index)
       const years = this.$store.getters['metrics/getYears'](this.index)
 
       const datasets = this.$store.state.metrics.selectedTerritories.map(

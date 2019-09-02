@@ -126,7 +126,7 @@ export default {
       )
     },
     data() {
-      const data = this.$store.getters['metrics/getData'](this.index)
+      const data = this.$store.getters['metrics/getDataByTerritory'](this.index)
 
       const territoriesLabels = this.selectedTerritories.map((territory) => {
         return this.$store.getters['metrics/getTerritoryLabel'](
