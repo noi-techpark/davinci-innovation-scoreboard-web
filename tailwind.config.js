@@ -7,6 +7,7 @@
 module.exports = {
   theme: {
     colors: {
+      transparent: 'transparent',
       white: '#FFF',
       black: '#000',
       gray: {
@@ -50,6 +51,38 @@ module.exports = {
       '6': '6rem',
       'i': '1.5rem'
     },
+    fontFamily: {
+      sans: [
+        'Source Sans Pro',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      serif: [
+        'Georgia',
+        'Cambria',
+        '"Times New Roman"',
+        'Times',
+        'serif',
+      ],
+      mono: [
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Liberation Mono"',
+        '"Courier New"',
+        'monospace',
+      ],
+    },
     extend: {
       borderWidth: {
         '3': '3px'
@@ -60,6 +93,10 @@ module.exports = {
       }
     }
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'disabled'],
+    borderColor: ['responsive', 'hover', 'focus', 'disabled'],
+    textColor: ['responsive', 'hover', 'focus', 'disabled']
+  },
   plugins: []
 }

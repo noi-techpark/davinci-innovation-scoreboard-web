@@ -8,5 +8,6 @@ services:
     command: npm run dev
     environment:
       HOST: 0.0.0.0
+      API: 'http://localhost:8080/v1/'
     ports:
       - "3000:3000"

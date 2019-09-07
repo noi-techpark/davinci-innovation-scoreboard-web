@@ -17,7 +17,7 @@
       :class="{ 'bg-gray-500 text-gray-300': draggingOver }"
     >
       <div
-        v-if="isFileSelected"
+        v-if="isFileSelected || isFileUploading"
         class="flex flex-col justify-center text-lg text-black"
       >
         <div>
@@ -28,14 +28,14 @@
 
         <div class="mt-4 flex justify-center">
           <button
-            class="mr-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
+            class="mr-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
             :disabled="isFileUploading"
             @click="upload"
           >
             Upload
           </button>
           <button
-            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
+            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
             :disabled="isFileUploading"
             @click="cancel"
           >
@@ -126,16 +126,75 @@
       <table class="w-full">
         <thead>
           <tr class="table__header">
-            <th class="column__header">Source</th>
+            <th class="column__header">Type</th>
+            <th class="column__header">File</th>
             <th class="column__header">Upload Date</th>
             <th class="column__header">Status</th>
+            <th class="column__header"></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, id) in history" :key="id" class="row">
-            <td class="cell">{{ item.source }}</td>
-            <td class="cell">{{ item.importDate | formatDate }}</td>
-            <td class="cell">{{ item.status }}</td>
+          <tr v-for="(item, id) in historyTable" :key="id" class="row">
+            <td class="cell">
+              {{ item.type }}
+            </td>
+            <td class="cell">
+              <a :href="item.fileUrl" download class="hover:underline">{{
+                item.fileName
+              }}</a>
+            </td>
+            <td class="cell">
+              {{ item.importDate }}
+            </td>
+            <td class="cell">
+              {{ item.status }}
+            </td>
+            <td class="cell">
+              <Modal v-if="item.logs">
+                <button
+                  slot="button"
+                  slot-scope="{ openModal }"
+                  class="hover:text-gray-500"
+                  @click="openModal"
+                >
+                  <InfoIcon class="inline fill-current" />
+                  <span class="sr-only"
+                    >Show Logs of File {{ item.fileName }}</span
+                  >
+                </button>
+
+                <div
+                  v-cloak
+                  slot="modal"
+                  slot-scope="{ closeModal }"
+                  class="m-4 bg-white"
+                >
+                  <div class="p-4 flex justify-between items-center">
+                    <div class="font-bold text-xl md:text-2xl uppercase">
+                      Logs
+                    </div>
+
+                    <button
+                      class="text-black hover:text-gray-500"
+                      @click="closeModal"
+                    >
+                      <ExitIcon class="icon fill-current" />
+                      <span class="sr-only">Close Logs</span>
+                    </button>
+                  </div>
+                  <pre class="px-4 font-sans">{{ item.logs }}</pre>
+
+                  <div class="p-4 flex justify-end">
+                    <button
+                      class="mr-2 px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
+                      @click="closeModal"
+                    >
+                      CLOSE
+                    </button>
+                  </div>
+                </div>
+              </Modal>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -144,11 +203,14 @@
 </template>
 
 <script>
+import Modal from '@/components/modal.vue'
 import LogoutIcon from '@/components/icons/logout.vue'
 import AddIcon from '@/components/icons/add.vue'
 import UploadIcon from '@/components/icons/upload.vue'
 import SuccessIcon from '@/components/icons/success.vue'
 import ErrorIcon from '@/components/icons/error.vue'
+import InfoIcon from '@/components/icons/info.vue'
+import ExitIcon from '@/components/icons/exit.vue'
 
 const STATE_FILE_NOT_SELECTED = 'File not selected'
 const STATE_FILE_SELECTED = 'File selected'
@@ -156,13 +218,33 @@ const STATE_UPLOADING_FILE = 'Uploading file'
 const STATE_UPLOAD_SUCCEEDED = 'Upload succeeded'
 const STATE_UPLOAD_FAILED = 'Upload failed'
 
+const HISTORY_TYPES = {
+  INNOVATION_IN_COMPANIES_WITH_AT_LEAST_10_EMPLOYEES:
+    'INNOVATION IN COMPANIES WITH AT LEAST 10 EMPLOYEES',
+  ICT_IN_COMPANIES_WITH_AT_LEAST_10_EMPLOYEES:
+    'ICT IN COMPANIES WITH AT LEAST 10 EMPLOYEES',
+  RESEARCH_AND_DEVELOPMENT: 'RESEARCH AND DEVELOPMENT'
+}
+
+const HISTORY_STATES = {
+  UPLOADED: 'UPLOADED',
+  PROCESSING: 'PROCESSING',
+  PROCESSED_WITH_SUCCESS: 'PROCESSED WITH SUCCESS',
+  PROCESSED_WITH_WARNINGS: 'PROCESSED WITH WARNINGS',
+  PROCESSED_WITH_ERRORS: 'PROCESSED WITH ERRORS',
+  REPLACED: 'REPLACED'
+}
+
 export default {
   components: {
+    Modal,
     LogoutIcon,
     AddIcon,
     UploadIcon,
     SuccessIcon,
-    ErrorIcon
+    ErrorIcon,
+    InfoIcon,
+    ExitIcon
   },
   data() {
     return {
@@ -192,6 +274,35 @@ export default {
     },
     uploadingFailed() {
       return this.state === STATE_UPLOAD_FAILED
+    },
+    historyTable() {
+      const sortedHistory = this.history
+        .filter(() => {
+          return true
+        })
+        .sort((itemA, itemB) => {
+          return (
+            this.$options.filters.formatUnix(itemB.importDate) -
+            this.$options.filters.formatUnix(itemA.importDate)
+          )
+        })
+
+      const downloadUrl =
+        process.env.api +
+        'stats/download/{id}?access_token=' +
+        this.$auth.getToken('local').substring(7)
+
+      return sortedHistory.map((item) => {
+        return {
+          id: item.id,
+          type: HISTORY_TYPES[item.type],
+          fileName: item.source,
+          fileUrl: downloadUrl.replace('{id}', item.id),
+          importDate: this.$options.filters.formatDate(item.importDate),
+          status: HISTORY_STATES[item.status],
+          logs: item.logs
+        }
+      })
     }
   },
   mounted() {

@@ -1,5 +1,8 @@
 export default {
   mode: 'spa',
+  env: {
+    api: process.env.API || 'http://localhost:8080/v1/'
+  },
   head: {
     title: 'Innovation Scoreboard',
     meta: [

@@ -1,5 +1,5 @@
 <template>
-  <div id="layout">
+  <div id="layout" class="font-sans">
     <div class="mb-4">
       <div class="mb-4 xl:mb-0 flex content-end border-b border-gray-500">
         <div class="p-4 flex flex-col justify-center">
@@ -100,7 +100,6 @@ export default {
 
 <style>
 #layout {
-  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @apply text-black;
