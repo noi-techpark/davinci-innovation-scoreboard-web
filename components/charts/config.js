@@ -45,6 +45,11 @@ export const DATASET_COLOR_BAR_NORMAL = {
   sat: 0,
   light: 0
 }
+export const DATASET_COLOR_PIE_NORMAL = {
+  hue: 0,
+  sat: 0,
+  light: 78
+}
 export const DATASET_PATTERN_STYLES = [
   'disc',
   'cross',

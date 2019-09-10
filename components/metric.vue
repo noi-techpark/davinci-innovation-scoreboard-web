@@ -66,6 +66,15 @@
         :select-year="selectYear"
         class="mt-5 pb-5 border-b border-gray-400"
       />
+
+      <NaceComparison
+        v-if="hasDataByNace"
+        :index="index"
+        :metric="metric"
+        :selected-year="selectedYear"
+        :select-year="selectYear"
+        class="mt-5 pb-5 border-b border-gray-400"
+      />
     </div>
   </div>
 </template>
@@ -77,6 +86,7 @@ import OpenIcon from '@/components/icons/open.vue'
 import CloseIcon from '@/components/icons/close.vue'
 import YearComparison from '@/components/comparisons/year.vue'
 import GroupComparison from '@/components/comparisons/group.vue'
+import NaceComparison from '@/components/comparisons/nace.vue'
 
 function moduloComparisonValueforLeftPadding(openMetric, index) {
   if (openMetric === null) return 1
@@ -100,7 +110,8 @@ export default {
     OpenIcon,
     CloseIcon,
     YearComparison,
-    GroupComparison
+    GroupComparison,
+    NaceComparison
   },
   props: {
     index: {
@@ -145,6 +156,9 @@ export default {
             this.index
           )
       )
+    },
+    hasDataByNace() {
+      return this.$store.getters['metrics/hasDataByNace'](this.index)
     }
   },
   methods: {

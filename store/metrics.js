@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import territories from '@/meta/territories'
+import nace from '@/meta/nace'
 import metrics from '@/meta/metrics'
 
 export const state = () => ({
@@ -9,6 +10,7 @@ export const state = () => ({
   },
   territories,
   selectedTerritories: ['IT', 'ITD', 'ITD1', 'ITD2', 'ITD3', 'ITC4'],
+  nace,
   metrics,
   openMetric: null
 })
@@ -17,8 +19,14 @@ export const getters = {
   isMetricOpen: (state) => (index) => {
     return state.openMetric === index
   },
+  hasDataByNace: (state) => (index) => {
+    return state.metrics[index].dataByNace !== null
+  },
   getDataByTerritory: (state) => (index) => {
     return state.metrics[index].dataByTerritory
+  },
+  getDataByNace: (state) => (index) => {
+    return state.metrics[index].dataByNace
   },
   getYears: (state) => (index) => {
     const data = state.metrics[index].dataByTerritory
@@ -45,19 +53,22 @@ export const mutations = {
   metricsLoaded(state) {
     state.loaded = true
   },
-  metricLoaded(state, { id, data }) {
+  metricLoaded(state, { id, dataByTerritory, dataByNace }) {
     state.metrics.forEach((metric) => {
       if (metric.id !== id) return
 
-      metric.dataByTerritory = data
+      metric.dataByTerritory = dataByTerritory
+      metric.dataByNace = dataByNace
 
-      const latest = data.ITD1.reduce((previousValue, currentValue) => {
-        if (parseInt(previousValue.year) > parseInt(currentValue.year)) {
-          return previousValue
-        } else {
-          return currentValue
+      const latest = dataByTerritory.ITD1.reduce(
+        (previousValue, currentValue) => {
+          if (parseInt(previousValue.year) > parseInt(currentValue.year)) {
+            return previousValue
+          } else {
+            return currentValue
+          }
         }
-      })
+      )
 
       metric.value = latest.total
     })
@@ -108,38 +119,59 @@ export const actions = {
         '/statistics/domestic-research-and-development-expenditure-in-house-divided-by-territory'
       )
 
+      const request6 = this.$axios(
+        '/statistics/enterprises-with-innovation-activities-in-italy-divided-by-nace'
+      )
+
+      const request7 = this.$axios(
+        '/statistics/enterprises-that-have-introduced-product-or-process-innovations-in-italy-divided-by-nace'
+      )
+
+      const request8 = this.$axios(
+        '/statistics/innovation-expenditure-in-italy-divided-by-nace'
+      )
+
       const responses = await Promise.all([
         request0,
         request1,
         request2,
         request3,
         request4,
-        request5
+        request5,
+        request6,
+        request7,
+        request8
       ])
 
       commit('metricLoaded', {
         id: 'metric0',
-        data: responses[0].data.statistics
+        dataByTerritory: responses[0].data.statistics,
+        dataByNace: responses[6].data.statistics
       })
       commit('metricLoaded', {
         id: 'metric1',
-        data: responses[1].data.statistics
+        dataByTerritory: responses[1].data.statistics,
+        dataByNace: responses[7].data.statistics
       })
       commit('metricLoaded', {
         id: 'metric2',
-        data: responses[2].data.statistics
+        dataByTerritory: responses[2].data.statistics,
+        dataByNace: responses[8].data.statistics
       })
       commit('metricLoaded', {
         id: 'metric3',
-        data: responses[3].data.statistics
+        dataByTerritory: responses[3].data.statistics,
+        dataByNace: null
       })
       commit('metricLoaded', {
         id: 'metric4',
-        data: responses[4].data.statistics
+        dataByTerritory: responses[4].data.statistics,
+        dataByNace: null
       })
       commit('metricLoaded', {
         id: 'metric5',
-        data: responses[5].data.statistics
+        dataByTerritory: responses[5].data.statistics,
+        dataByNace: null
       })
 
       commit('metricsLoaded')

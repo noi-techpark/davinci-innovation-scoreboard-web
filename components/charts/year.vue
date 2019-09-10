@@ -30,10 +30,7 @@ export default {
               label(tooltipItems, data) {
                 const dataset = data.datasets[tooltipItems.datasetIndex]
                 const value = dataset.data[tooltipItems.index]
-                const label =
-                  dataset.label === undefined
-                    ? data.labels[tooltipItems.index]
-                    : dataset.label
+                const label = dataset.label
 
                 return label + ': ' + value.toLocaleString('de-DE')
               }
