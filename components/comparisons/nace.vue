@@ -3,7 +3,7 @@
     <div>
       <div class="flex justify-between items-center">
         <div class="font-bold text-xl uppercase">
-          {{ metric.title }} in Italy
+          {{ metric.title }} in Italy devided by Nace
         </div>
 
         <SelectYear
