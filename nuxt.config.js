@@ -38,7 +38,7 @@ export default {
     '@nuxtjs/pwa'
   ],
   axios: {
-    baseURL: 'http://localhost:8080/v1/'
+    baseURL: process.env.API || 'http://localhost:8080/v1/'
   },
   router: {
     middleware: ['auth']
