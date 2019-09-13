@@ -10,12 +10,12 @@
           :years="years"
           :selected-year="selectedYear"
           :select-year="selectYear"
-          class="my-1 flex items-center"
+          class="my-1"
         />
       </div>
     </div>
-    <div class="mt-3 pb-2 flex flex-row">
-      <div class="flex-1 flex flex-col">
+    <div class="mt-3 pb-2 flex flex-col md:flex-row">
+      <div class="mb-4 md:mb-0 flex-1 flex flex-col">
         <div>
           <SelectableButton
             v-for="group in nace"
@@ -28,11 +28,36 @@
             class="my-1 mr-3"
           />
         </div>
-        <div v-if="hasMarkedGroup" class="mt-3 flex flex-wrap justify-between">
+        <div
+          v-if="!hasMarkedGroup"
+          class="mt3 flex flex-wrap justify-between md:justify-start"
+        >
+          <div
+            v-for="group in groupsWithValue"
+            :key="group.id"
+            class="my-3 mr-3 w-full sm:w-1/3 md:w-1/4"
+          >
+            <button
+              class="text-left"
+              :class="group.class"
+              @click="markGroup(group.id)"
+            >
+              {{ group.name }}
+            </button>
+            <br />
+            <span class="font-bold" :class="'text-' + metric.id + '-500'">{{
+              group.value
+            }}</span>
+          </div>
+        </div>
+        <div
+          v-if="hasMarkedGroup"
+          class="mt-3 flex flex-wrap justify-between md:justify-start"
+        >
           <div
             v-for="subgroup in subgroupsOfMarkedGroupWithValues"
             :key="subgroup.id"
-            class="my-3 mr-3 w-1/4"
+            class="my-3 mr-3 w-full sm:w-1/3 md:w-1/4"
           >
             <button
               class="text-left"
@@ -49,7 +74,7 @@
         </div>
       </div>
 
-      <NaceChart :chart-data="data" class="flex-1" />
+      <NaceChart :chart-data="data" :options="options" class="flex-1" />
     </div>
   </div>
 </template>
@@ -126,7 +151,6 @@ export default {
         return this.isSubgroupMarked(subgroup.id)
       })
     },
-
     dataFromSelectedYear() {
       const data = this.$store.getters['metrics/getDataByNace'](this.index)
 
@@ -136,6 +160,28 @@ export default {
         return g.id === 'ATECO_2007'
       }).values
     },
+    groupsWithValue() {
+      return this.nace.map((group) => {
+        let value = 'NO DATA'
+
+        if (
+          group.id in this.dataFromSelectedYear &&
+          this.dataFromSelectedYear[group.id] !== null
+        ) {
+          value =
+            this.dataFromSelectedYear[group.id].toLocaleString('de-DE') +
+            ' ' +
+            this.metric.unit
+        }
+
+        return {
+          id: group.id,
+          name: group.name,
+          value,
+          class: 'text-black-500 hover:text-' + this.metric.id + '-500'
+        }
+      })
+    },
     subgroupsOfMarkedGroupWithValues() {
       if (!this.hasMarkedGroup) {
         return null
@@ -144,7 +190,10 @@ export default {
       return this.markedGroup.subgroups.map((subgroup) => {
         let value = 'NO DATA'
 
-        if (subgroup.id in this.dataFromSelectedYear) {
+        if (
+          subgroup.id in this.dataFromSelectedYear &&
+          this.dataFromSelectedYear[subgroup.id] !== null
+        ) {
           value =
             this.dataFromSelectedYear[subgroup.id].toLocaleString('de-DE') +
             ' ' +
@@ -176,57 +225,81 @@ export default {
         DATASET_COLOR_PIE_NORMAL.sat,
         DATASET_COLOR_PIE_NORMAL.light
       )
-      const transparentColor = 'transparent'
-      const markedColor = hslToColor(
-        metricColor.hue,
-        metricColor.sat,
-        metricColor.light
-      )
+      const markedColor = [
+        hslToColor(metricColor.hue, metricColor.sat, metricColor.light),
+        hslToColor(
+          metricColor.hue,
+          metricColor.sat,
+          (100 - metricColor.light) * 0.5 + metricColor.light
+        )
+      ]
       const hoverColor = markedColor
 
-      const dataset1 = {
+      const dataset = {
         data: [],
         label: [],
         backgroundColor: [],
-        hoverBackgroundColor: [],
-        hoverBorderColor: transparentColor
-      }
-      const dataset2 = {
-        data: [],
-        label: [],
-        backgroundColor: [],
-        hoverBackgroundColor: [],
-        hoverBorderColor: transparentColor
+        hoverBackgroundColor: []
       }
 
-      this.nace.forEach((group) => {
-        dataset1.data.push(data[group.id])
-        dataset1.label.push(group.name.toUpperCase())
-
-        dataset1.backgroundColor.push(
-          this.markedGroupId === group.id ? markedColor : normalColor
-        )
-        dataset1.hoverBackgroundColor.push(hoverColor)
-
-        group.subgroups.forEach((subgroup) => {
-          dataset2.data.push(data[subgroup.id])
-          dataset2.label.push(subgroup.name.toUpperCase())
-
-          if (this.markedSubgroupId === subgroup.id) {
-            dataset2.backgroundColor.push(markedColor)
-            dataset2.hoverBackgroundColor.push(hoverColor)
-          } else if (this.markedGroupId === group.id) {
-            dataset2.backgroundColor.push(normalColor)
-            dataset2.hoverBackgroundColor.push(hoverColor)
-          } else {
-            dataset2.backgroundColor.push(transparentColor)
-            dataset2.hoverBackgroundColor.push(transparentColor)
+      if (this.hasMarkedGroup) {
+        this.nace.forEach((group, index) => {
+          if (this.markedGroupId !== group.id) {
+            return
           }
+
+          group.subgroups.forEach((subgroup) => {
+            dataset.data.push(data[subgroup.id])
+            dataset.label.push(subgroup.name.toUpperCase())
+
+            if (
+              !this.hasMarkedSubgroup ||
+              this.markedSubgroupId === subgroup.id
+            ) {
+              dataset.backgroundColor.push(markedColor[index])
+              dataset.hoverBackgroundColor.push(hoverColor[index])
+            } else {
+              dataset.backgroundColor.push(normalColor)
+              dataset.hoverBackgroundColor.push(hoverColor[index])
+            }
+          })
         })
-      })
+      } else {
+        this.nace.forEach((group, index) => {
+          dataset.data.push(data[group.id])
+          dataset.label.push(group.name.toUpperCase())
+          dataset.backgroundColor.push(markedColor[index])
+          dataset.hoverBackgroundColor.push(hoverColor[index])
+        })
+      }
 
       return {
-        datasets: [dataset1, dataset2]
+        datasets: [dataset]
+      }
+    },
+    options() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        rotation: Math.PI * (this.hasMarkedGroup ? 1 : 0.5),
+        circumference: Math.PI * (this.hasMarkedGroup ? 1 : 2),
+        tooltips: {
+          callbacks: {
+            label(tooltipItems, data) {
+              const dataset = data.datasets[tooltipItems.datasetIndex]
+              const value = dataset.data[tooltipItems.index]
+              const label =
+                dataset.label === undefined
+                  ? data.labels[tooltipItems.index]
+                  : dataset.label[tooltipItems.index]
+
+              return label + ': ' + value.toLocaleString('de-DE')
+            }
+          }
+        }
       }
     }
   },

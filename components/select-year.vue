@@ -1,5 +1,5 @@
 <template>
-  <div class="relative text-black hover:text-gray-500">
+  <div class="select-year relative text-black hover:text-gray-500">
     <select
       class="block appearance-none w-full py-3 px-4 leading-tight text-xl focus:outline-none cursor-pointer"
       :value="selectedYear"
@@ -45,3 +45,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.select-year {
+  min-width: 110px;
+}
+</style>

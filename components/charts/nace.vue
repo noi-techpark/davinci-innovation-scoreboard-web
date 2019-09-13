@@ -39,10 +39,6 @@ export default {
   },
   mounted() {
     this.renderChart(this.chartData, this.options)
-
-    this.$refs.canvas.onclick = (evt) => {
-      console.log(this.$data._chart.getElementsAtEvent(evt))
-    }
   }
 }
 </script>
