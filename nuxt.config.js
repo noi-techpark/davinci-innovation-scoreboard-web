@@ -61,6 +61,22 @@ export default {
     },
     resetOnError: true
   },
+  purgeCSS: {
+    whitelist: [
+      'text-metric0-500',
+      'text-metric1-500',
+      'text-metric2-500',
+      'text-metric3-500',
+      'text-metric4-500',
+      'text-metric5-500',
+      'hover:text-metric0-500',
+      'hover:text-metric1-500',
+      'hover:text-metric2-500',
+      'hover:text-metric3-500',
+      'hover:text-metric4-500',
+      'hover:text-metric5-500',
+    ],
+  },
   build: {
     extend(config, ctx) {
         if (ctx.isDev && ctx.isClient) {
