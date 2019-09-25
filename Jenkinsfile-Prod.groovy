@@ -10,7 +10,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 
-        API = "https://api.innovation.davinci.bz.it"
+        API = "https://api.innovation.davinci.bz.it/v1/"
     }
 
     stages {
