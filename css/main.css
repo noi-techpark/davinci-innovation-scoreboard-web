@@ -1,0 +1,19 @@
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+@screen sm {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+@screen lg {
+  .icon {
+    width: 35px;
+    height: 35px;
+  }
+}
