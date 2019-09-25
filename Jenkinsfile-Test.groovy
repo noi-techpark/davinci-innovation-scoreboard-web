@@ -11,7 +11,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 
-        API = "https://api.innovation-scoreboard.davinci.testingmachine.eu"
+        API = "https://api.innovation.davinci.testingmachine.eu"
     }
 
     stages {
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Upload') {
             steps {
-                s3Upload(bucket: 'innovation-scoreboard-test', acl: 'PublicRead', file: './dist')
+                s3Upload(bucket: 'test-innovation-web', acl: 'PublicRead', file: './dist')
             }
         }
     }
