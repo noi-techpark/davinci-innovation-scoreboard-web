@@ -11,6 +11,10 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 
         API = "https://api.innovation.davinci.testingmachine.eu/v1/"
+        KEYCLOAK_CLIENT_ID = "davinci-innovation-scoreboard-web"
+        KEYCLOAK_CALLBACK = "https://innovation.davinci.testingmachine.eu/callback"
+        KEYCLOAK_AUTHORIZATION_URI = "https://auth.opendatahub.testingmachine.eu/auth/realms/NOI/protocol/openid-connect/auth"
+        KEYCLOAK_USERINFO_URI = "https://auth.opendatahub.testingmachine.eu/auth/realms/NOI/protocol/openid-connect/userinfo"
     }
 
     stages {
