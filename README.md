@@ -21,6 +21,7 @@ on your local machine for development and testing purposes.
 
 To build the project, the following prerequisites must be met:
 
+- [Running authentication server](https://github.com/noi-techpark/authentication-server)
 - Node 12 (and NPM)
 
 If you don't want to install all prerequisites directly on your machine and instead use a Docker environment with all prerequisites already installed and configured, you can check out the [Docker environment](#docker-environment) section.
