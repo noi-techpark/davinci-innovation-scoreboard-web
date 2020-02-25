@@ -1,7 +1,7 @@
 export default {
   mode: 'spa',
   env: {
-    api: process.env.API || 'http://localhost:8080/v1/'
+    api: process.env.API || 'http://localhost:8081/v1/'
   },
   head: {
     title: 'Innovation Scoreboard',
@@ -38,7 +38,8 @@ export default {
     '@nuxtjs/pwa'
   ],
   axios: {
-    baseURL: process.env.API || 'http://localhost:8080/v1/'
+    baseURL: process.env.API || 'http://localhost:8081/v1/',
+    credentials: true
   },
   router: {
     middleware: ['auth']
@@ -47,16 +48,20 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/admin'
+      home: '/admin',
+      callback: '/callback'
     },
     strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'authenticate', method: 'post', propertyName: 'token' },
-          user: false,
-          logout: false
-
-        }
+      noi: {
+        _scheme: 'oauth2',
+        authorization_endpoint: process.env.KEYCLOAK_AUTHORIZATION_URI || 'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/auth',
+        userinfo_endpoint: process.env.KEYCLOAK_USERINFO_URI || 'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/userinfo',
+        scope: ['profile', 'email'],
+        response_type: 'token',
+        token_key: 'access_token',
+        token_type: 'Bearer',
+        redirect_uri: process.env.KEYCLOAK_CALLBACK || 'http://localhost:3000/callback',
+        client_id: process.env.KEYCLOAK_CLIENT_ID || 'davinci-innovation-scoreboard-web'
       }
     },
     resetOnError: true

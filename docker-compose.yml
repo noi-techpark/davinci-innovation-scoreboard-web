@@ -10,6 +10,10 @@ services:
     command: npm run dev
     environment:
       HOST: 0.0.0.0
-      API: 'http://localhost:8080/v1/'
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+      KEYCLOAK_CALLBACK: ${KEYCLOAK_CALLBACK}
+      KEYCLOAK_AUTHORIZATION_URI: ${KEYCLOAK_AUTHORIZATION_URI}
+      KEYCLOAK_USERINFO_URI: ${KEYCLOAK_USERINFO_URI}
+      API: ${API}
     ports:
-      - "3000:3000"
+      - "${SERVER_PORT:-3000}:3000"

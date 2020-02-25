@@ -21,9 +21,50 @@ on your local machine for development and testing purposes.
 
 To build the project, the following prerequisites must be met:
 
+- [Running authentication server](https://github.com/noi-techpark/authentication-server)
 - Node 12 (and NPM)
 
 If you don't want to install all prerequisites directly on your machine and instead use a Docker environment with all prerequisites already installed and configured, you can check out the [Docker environment](#docker-environment) section.
+
+### How to setup NOI Authentication Server locally?
+
+Skip this section if you connect to the NOI authentication test server.
+
+- [Here](https://github.com/noi-techpark/authentication-server) you can find how to run the server locally
+- Create a new realm following these [steps](https://github.com/noi-techpark/authentication-server/blob/master/docs/noi-authentication-server.md#realm)
+
+#### How to register this application in your local authentication server?
+
+1. Open the previously created realm
+2. Create a new client (Clients -> Create)
+
+| Property | Value                             |
+| -------- | --------------------------------- |
+| ClientID | davinci-innovation-scoreboard-web |
+
+3. Client Settings
+
+| Property    | Value  |
+| ----------- | ------ |
+| Access Type | public |
+| Standard Flow Enabled | Off |
+| Implicit Flow Enabled | On |
+| Direct Access Grants Enabled | Off |
+| Valid Redirect URIs | http://localhost:3000/callback |
+| Web origins | http://localhost:3000 |
+
+4. Navigate to Scope
+
+| Property                                          | Value                                  |
+| ------------------------------------------------- | -------------------------------------- |
+| Full Scope Allowed                                | Off                                    |
+| Client Roles -> davinci-innovation-scoreboard-api -> Assigned Roles | Move available roles to assigned roles |
+
+#### How to create a user or assign a user the necessary roles for this application?
+
+1. Go to users
+2. Create user or select user (View users)
+3. Assign roles: Role Mappings -> Client Roles -> davinci-innovation-scoreboard-api
 
 ### Source code
 
