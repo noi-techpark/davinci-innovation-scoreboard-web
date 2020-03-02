@@ -45,10 +45,10 @@ export default {
   },
   auth: {
     redirect: {
-      login: '/login',
-      logout: '/login',
-      home: '/admin',
-      callback: '/callback'
+      login: '/login/',
+      logout: '/login/',
+      home: '/admin/',
+      callback: '/callback/'
     },
     strategies: {
       noi: {
