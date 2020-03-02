@@ -34,8 +34,7 @@ export default {
   ],
   modules: [
     '@nuxtjs/auth',
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/axios'
   ],
   axios: {
     baseURL: process.env.API || 'http://localhost:8081/v1/',
