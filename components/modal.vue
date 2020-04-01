@@ -3,9 +3,9 @@
     <slot :open-modal="openModal" name="button"></slot>
 
     <portal v-if="paint" to="modals">
-      <transition @after-leave="afterLeave" name="modal">
-        <div v-show="open" @click="closeModal" class="modal-mask">
-          <div @click.stop class="modal-container">
+      <transition name="modal" @after-leave="afterLeave">
+        <div v-show="open" class="modal-mask" @click="closeModal">
+          <div class="modal-container" @click.stop>
             <slot :close-modal="closeModal" name="modal"></slot>
           </div>
         </div>

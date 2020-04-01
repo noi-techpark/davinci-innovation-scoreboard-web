@@ -3,20 +3,20 @@
     <button
       slot="button"
       slot-scope="{ openModal }"
-      @click="openModal"
       class="text-black hover:text-gray-500"
+      @click="openModal"
     >
       <ConfigIcon class="icon fill-current" />
       <span class="sr-only">Configure Territories</span>
     </button>
 
-    <div slot="modal" v-cloak slot-scope="{ closeModal }" class="m-4 bg-white">
+    <div v-cloak slot="modal" slot-scope="{ closeModal }" class="m-4 bg-white">
       <div class="p-4 flex justify-between items-center">
         <div class="font-bold text-xl md:text-2xl uppercase">
           Filter Territories
         </div>
 
-        <button @click="closeModal" class="text-black hover:text-gray-500">
+        <button class="text-black hover:text-gray-500" @click="closeModal">
           <ExitIcon class="icon fill-current" />
           <span class="sr-only">Close Territories Configuration</span>
         </button>
@@ -45,19 +45,19 @@
 
       <div class="p-4 flex justify-end">
         <button
-          @click="closeModal"
           class="mr-2 px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
+          @click="closeModal"
         >
           CANCEL
         </button>
         <button
+          class="px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
           @click="
             () => {
               ok()
               closeModal()
             }
           "
-          class="px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
         >
           OK
         </button>

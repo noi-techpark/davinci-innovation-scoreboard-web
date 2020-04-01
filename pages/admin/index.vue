@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="mb-4 text-right">
+      <a
+        :href="accountUri"
+        class="ml-3 px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
+      >
+        Profile
+        <ProfileIcon
+          class="ml-1 inline w-i h-i align-text-bottom fill-current"
+        />
+      </a>
       <button
-        @click="logout"
         class="px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
+        @click="logout"
       >
         Logout
         <LogoutIcon
@@ -29,15 +38,15 @@
         <div class="mt-4 flex justify-center">
           <button
             :disabled="isFileUploading"
-            @click="upload"
             class="mr-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
+            @click="upload"
           >
             Upload
           </button>
           <button
             :disabled="isFileUploading"
-            @click="cancel"
             class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
+            @click="cancel"
           >
             Cancel
           </button>
@@ -58,8 +67,8 @@
 
         <div class="mt-4 text-center">
           <button
-            @click="cancel"
             class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
+            @click="cancel"
           >
             Done
           </button>
@@ -80,8 +89,8 @@
 
         <div class="mt-4 text-center">
           <button
-            @click="cancel"
             class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
+            @click="cancel"
           >
             Done
           </button>
@@ -97,16 +106,18 @@
         </div>
         <input
           ref="fileInput"
-          @change="onFileChange"
           type="file"
           name="file"
           accept="text/csv"
           class="hidden"
+          @change="onFileChange"
         />
       </div>
 
       <canvas
         v-if="isFileNotSelected"
+        class="absolute z-50 top-0 left-0 w-full h-full"
+        tabindex="0"
         @drag.stop.prevent=""
         @dragover.stop.prevent=""
         @dragstart.stop.prevent=""
@@ -116,8 +127,6 @@
         @drop.stop.prevent="onFileDrop"
         @click.prevent="onClick"
         @keyup.enter="onClick"
-        class="absolute z-50 top-0 left-0 w-full h-full"
-        tabindex="0"
       >
       </canvas>
     </div>
@@ -154,8 +163,8 @@
                 <button
                   slot="button"
                   slot-scope="{ openModal }"
-                  @click="openModal"
                   class="hover:text-gray-500"
+                  @click="openModal"
                 >
                   <InfoIcon class="inline fill-current" />
                   <span class="sr-only"
@@ -164,8 +173,8 @@
                 </button>
 
                 <div
-                  slot="modal"
                   v-cloak
+                  slot="modal"
                   slot-scope="{ closeModal }"
                   class="m-4 bg-white"
                 >
@@ -175,8 +184,8 @@
                     </div>
 
                     <button
-                      @click="closeModal"
                       class="text-black hover:text-gray-500"
+                      @click="closeModal"
                     >
                       <ExitIcon class="icon fill-current" />
                       <span class="sr-only">Close Logs</span>
@@ -186,8 +195,8 @@
 
                   <div class="p-4 flex justify-end">
                     <button
-                      @click="closeModal"
                       class="mr-2 px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
+                      @click="closeModal"
                     >
                       CLOSE
                     </button>
@@ -205,6 +214,7 @@
 <script>
 import Modal from '@/components/modal.vue'
 import LogoutIcon from '@/components/icons/logout.vue'
+import ProfileIcon from '@/components/icons/profile.vue'
 import AddIcon from '@/components/icons/add.vue'
 import UploadIcon from '@/components/icons/upload.vue'
 import SuccessIcon from '@/components/icons/success.vue'
@@ -239,6 +249,7 @@ export default {
   components: {
     Modal,
     LogoutIcon,
+    ProfileIcon,
     AddIcon,
     UploadIcon,
     SuccessIcon,
@@ -255,6 +266,9 @@ export default {
     }
   },
   computed: {
+    accountUri() {
+      return process.env.accountUri
+    },
     fileName() {
       if (this.file === null) return ''
 

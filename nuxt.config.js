@@ -1,7 +1,8 @@
 export default {
   mode: 'spa',
   env: {
-    api: process.env.API || 'http://localhost:8081/v1/'
+    api: process.env.API || 'http://localhost:8081/v1/',
+    accountUri: process.env.KEYCLOAK_ACCOUNT_URI || 'http://keycloak:8080/auth/realms/NOI/account/applications'
   },
   head: {
     title: 'Innovation Scoreboard',
