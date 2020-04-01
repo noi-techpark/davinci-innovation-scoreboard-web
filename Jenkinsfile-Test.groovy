@@ -15,6 +15,7 @@ pipeline {
         KEYCLOAK_CALLBACK = "https://innovation.davinci.testingmachine.eu/callback"
         KEYCLOAK_AUTHORIZATION_URI = "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/auth"
         KEYCLOAK_USERINFO_URI = "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/userinfo"
+        KEYCLOAK_ACCOUNT_URI = "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/account/applications"
     }
 
     stages {
