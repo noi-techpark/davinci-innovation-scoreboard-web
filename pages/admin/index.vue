@@ -3,7 +3,7 @@
     <div class="mb-4 text-right">
       <a
         :href="accountUri"
-        class="ml-3 px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
+        class="mr-3 px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
       >
         Profile
         <ProfileIcon
