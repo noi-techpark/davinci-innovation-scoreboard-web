@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/development'
     needs: test
+    concurrency: deploy-test
     env:
       BUCKET_NAME : "test-innovation-web"
       API: "https://api.innovation.davinci.testingmachine.eu/v1/"
@@ -48,6 +49,7 @@ jobs:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/master'
     needs: test
+    concurrency: deploy-prod
     env:
       BUCKET_NAME : "prod-innovation-web"
       API: "https://api.innovation.davinci.bz.it/v1/"
