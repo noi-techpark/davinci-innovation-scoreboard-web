@@ -4,8 +4,6 @@ on: push
 
 env:
   AWS_REGION : "eu-west-1"
-  TEST_BUCKET_NAME : "test-innovation-web"
-  PROD_BUCKET_NAME : "prod-innovation-web"
 
 jobs:
   test:
@@ -23,6 +21,14 @@ jobs:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/development'
     needs: test
+    env:
+      BUCKET_NAME : "test-innovation-web"
+      API: "https://api.innovation.davinci.testingmachine.eu/v1/"
+      KEYCLOAK_CLIENT_ID: "davinci-innovation-scoreboard-web"
+      KEYCLOAK_CALLBACK: "https://innovation.davinci.testingmachine.eu/callback"
+      KEYCLOAK_AUTHORIZATION_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/auth"
+      KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/userinfo"
+      KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/account"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -36,12 +42,20 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - run: aws s3 sync ./dist s3://${{ env.TEST_BUCKET_NAME }}
+      - run: aws s3 sync ./dist s3://${{ env.BUCKET_NAME }}
 
   deploy-prod:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/master'
     needs: test
+    env:
+      BUCKET_NAME : "prod-innovation-web"
+      API: "https://api.innovation.davinci.bz.it/v1/"
+      KEYCLOAK_CLIENT_ID: "davinci-innovation-scoreboard-web"
+      KEYCLOAK_CALLBACK: "https://innovation.davinci.bz.it/callback"
+      KEYCLOAK_AUTHORIZATION_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/protocol/openid-connect/auth"
+      KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/protocol/openid-connect/userinfo"
+      KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/account"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -55,4 +69,4 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - run: aws s3 sync ./dist s3://${{ env.PROD_BUCKET_NAME }}
+      - run: aws s3 sync ./dist s3://${{ env.BUCKET_NAME }}
