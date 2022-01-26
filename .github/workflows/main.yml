@@ -9,13 +9,17 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Set up Node 16
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           cache: npm
-      - run: npm ci
-      - run: npm run test
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint code
+        run: npm run test
 
   deploy-test:
     runs-on: ubuntu-20.04
@@ -31,19 +35,25 @@ jobs:
       KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/userinfo"
       KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/account"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Set up Node 16
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           cache: npm
-      - run: npm ci
-      - run: npm run generate
-      - uses: aws-actions/configure-aws-credentials@v1
+      - name: Install dependencies
+        run: npm ci
+      - name: Build code
+        run: npm run generate
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - run: aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
+      - name: Sync files to S3 bucket
+        run: aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
 
   deploy-prod:
     runs-on: ubuntu-20.04
@@ -59,16 +69,22 @@ jobs:
       KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/protocol/openid-connect/userinfo"
       KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/account"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Set up Node 16
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           cache: npm
-      - run: npm ci
-      - run: npm run generate
-      - uses: aws-actions/configure-aws-credentials@v1
+      - name: Install dependencies
+        run: npm ci
+      - name: Build code
+        run: npm run generate
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - run: aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
+      - name: Sync files to S3 bucket
+        run: aws s3 sync --delete ./dist s3://${{ env.BUCKET_NAME }}
