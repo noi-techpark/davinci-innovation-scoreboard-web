@@ -11,8 +11,8 @@
         />
       </a>
       <button
-        class="px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
         @click="logout"
+        class="px-4 py-2 border-3 border-white hover:bg-black text-black hover:text-white font-bold text-xl uppercase"
       >
         Logout
         <LogoutIcon
@@ -38,15 +38,15 @@
         <div class="mt-4 flex justify-center">
           <button
             :disabled="isFileUploading"
-            class="mr-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
             @click="upload"
+            class="mr-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
           >
             Upload
           </button>
           <button
             :disabled="isFileUploading"
-            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
             @click="cancel"
+            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white disabled:border-gray-500 disabled:bg-transparent disabled:text-gray-500 font-bold text-lg uppercase"
           >
             Cancel
           </button>
@@ -67,8 +67,8 @@
 
         <div class="mt-4 text-center">
           <button
-            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
             @click="cancel"
+            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
           >
             Done
           </button>
@@ -89,8 +89,8 @@
 
         <div class="mt-4 text-center">
           <button
-            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
             @click="cancel"
+            class="ml-2 px-3 py-2 border-3 border-black hover:bg-black hover:text-white font-bold text-lg uppercase"
           >
             Done
           </button>
@@ -106,18 +106,16 @@
         </div>
         <input
           ref="fileInput"
+          @change="onFileChange"
           type="file"
           name="file"
           accept="text/csv"
           class="hidden"
-          @change="onFileChange"
         />
       </div>
 
       <canvas
         v-if="isFileNotSelected"
-        class="absolute z-50 top-0 left-0 w-full h-full"
-        tabindex="0"
         @drag.stop.prevent=""
         @dragover.stop.prevent=""
         @dragstart.stop.prevent=""
@@ -127,6 +125,8 @@
         @drop.stop.prevent="onFileDrop"
         @click.prevent="onClick"
         @keyup.enter="onClick"
+        class="absolute z-50 top-0 left-0 w-full h-full"
+        tabindex="0"
       >
       </canvas>
     </div>
@@ -163,8 +163,8 @@
                 <button
                   slot="button"
                   slot-scope="{ openModal }"
-                  class="hover:text-gray-500"
                   @click="openModal"
+                  class="hover:text-gray-500"
                 >
                   <InfoIcon class="inline fill-current" />
                   <span class="sr-only"
@@ -173,8 +173,8 @@
                 </button>
 
                 <div
-                  v-cloak
                   slot="modal"
+                  v-cloak
                   slot-scope="{ closeModal }"
                   class="m-4 bg-white"
                 >
@@ -184,8 +184,8 @@
                     </div>
 
                     <button
-                      class="text-black hover:text-gray-500"
                       @click="closeModal"
+                      class="text-black hover:text-gray-500"
                     >
                       <ExitIcon class="icon fill-current" />
                       <span class="sr-only">Close Logs</span>
@@ -195,8 +195,8 @@
 
                   <div class="p-4 flex justify-end">
                     <button
-                      class="mr-2 px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
                       @click="closeModal"
+                      class="mr-2 px-4 py-2 text-lg md:text-xl font-bold text-black hover:text-white hover:bg-black"
                     >
                       CLOSE
                     </button>

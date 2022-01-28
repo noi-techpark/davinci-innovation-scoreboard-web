@@ -2,7 +2,9 @@ export default {
   mode: 'spa',
   env: {
     api: process.env.API || 'http://localhost:8081/v1/',
-    accountUri: process.env.KEYCLOAK_ACCOUNT_URI || 'http://keycloak:8080/auth/realms/NOI/account/applications'
+    accountUri:
+      process.env.KEYCLOAK_ACCOUNT_URI ||
+      'http://keycloak:8080/auth/realms/NOI/account/applications'
   },
   head: {
     title: 'Innovation Scoreboard',
@@ -17,26 +19,18 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap' }
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap'
+      }
     ]
   },
   loading: { color: '#fff' },
-  css: [
-    '~/css/main.css'
-  ],
-  plugins: [
-    '~/plugins/axios',
-    '~/plugins/filters',
-    '~/plugins/portal',
-  ],
-  devModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/tailwindcss'
-  ],
-  modules: [
-    '@nuxtjs/auth',
-    '@nuxtjs/axios'
-  ],
+  css: ['~/css/main.css'],
+  plugins: ['~/plugins/axios', '~/plugins/filters', '~/plugins/portal'],
+  devModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/auth', '@nuxtjs/axios'],
   axios: {
     baseURL: process.env.API || 'http://localhost:8081/v1/',
     credentials: true
@@ -54,14 +48,20 @@ export default {
     strategies: {
       noi: {
         _scheme: 'oauth2',
-        authorization_endpoint: process.env.KEYCLOAK_AUTHORIZATION_URI || 'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/auth',
-        userinfo_endpoint: process.env.KEYCLOAK_USERINFO_URI || 'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/userinfo',
+        authorization_endpoint:
+          process.env.KEYCLOAK_AUTHORIZATION_URI ||
+          'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/auth',
+        userinfo_endpoint:
+          process.env.KEYCLOAK_USERINFO_URI ||
+          'http://localhost:8080/auth/realms/NOI/protocol/openid-connect/userinfo',
         scope: ['profile', 'email'],
         response_type: 'token',
         token_key: 'access_token',
         token_type: 'Bearer',
-        redirect_uri: process.env.KEYCLOAK_CALLBACK || 'http://localhost:3000/callback',
-        client_id: process.env.KEYCLOAK_CLIENT_ID || 'davinci-innovation-scoreboard-web'
+        redirect_uri:
+          process.env.KEYCLOAK_CALLBACK || 'http://localhost:3000/callback',
+        client_id:
+          process.env.KEYCLOAK_CLIENT_ID || 'davinci-innovation-scoreboard-web'
       }
     },
     resetOnError: true
@@ -97,22 +97,22 @@ export default {
       'hover:border-metric2-500',
       'hover:border-metric3-500',
       'hover:border-metric4-500',
-      'hover:border-metric5-500',
-    ],
+      'hover:border-metric5-500'
+    ]
   },
   build: {
     extend(config, ctx) {
-        if (ctx.isDev && ctx.isClient) {
-          config.module.rules.push({
-            enforce: "pre",
-            test: /\.(js|vue)$/,
-            loader: "eslint-loader",
-            exclude: /(node_modules)/,
-            options: {
-              fix: true
-            }
-          })
-        }
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
+        })
       }
+    }
   }
 }

@@ -39,8 +39,8 @@
           >
             <button
               :class="group.class"
-              class="text-left"
               @click="markGroup(group.id)"
+              class="text-left"
             >
               {{ group.name }}
             </button>
@@ -61,8 +61,8 @@
           >
             <button
               :class="subgroup.class"
-              class="text-left"
               @click="markSubgroup(subgroup.id)"
+              class="text-left"
             >
               {{ subgroup.name }}
             </button>

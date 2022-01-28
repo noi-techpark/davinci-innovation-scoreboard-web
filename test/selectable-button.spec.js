@@ -37,7 +37,7 @@ describe('selectable-button', () => {
       propsData: {
         text: 'Italy',
         value: 'IT',
-        selectedValue: selectedValue,
+        selectedValue,
         selectedColor: 'metric0',
         click: (value) => {
           selectedValue = value

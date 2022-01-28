@@ -28,8 +28,8 @@
       <div class="mt-1 flex flex-col justify-center">
         <button
           v-if="isMetricClose"
-          class="hover:text-gray-500"
           @click.prevent="openMetric(index)"
+          class="hover:text-gray-500"
         >
           <OpenIcon class="icon fill-current" />
           <span class="sr-only">Open metric</span>
@@ -37,8 +37,8 @@
 
         <button
           v-if="isMetricOpen"
-          class="hover:text-gray-500"
           @click.prevent="closeMetric(index)"
+          class="hover:text-gray-500"
         >
           <CloseIcon class="icon fill-current" />
           <span class="sr-only">Close metric</span>

@@ -1,9 +1,9 @@
 /*
-** TailwindCSS Configuration File
-**
-** Docs: https://tailwindcss.com/docs/configuration
-** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
-*/
+ ** TailwindCSS Configuration File
+ **
+ ** Docs: https://tailwindcss.com/docs/configuration
+ ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
+ */
 module.exports = {
   theme: {
     colors: {
@@ -17,28 +17,28 @@ module.exports = {
         '500': '#707070'
       },
       primary: {
-        '500': '#C1CA01',
+        '500': '#C1CA01'
       },
       error: {
-        '500': '#D20707',
+        '500': '#D20707'
       },
       metric0: {
-        '500': 'hsl(358, 60%, 59%)',
+        '500': 'hsl(358, 60%, 59%)'
       },
       metric1: {
-        '500': 'hsl(91, 21%, 49%)',
+        '500': 'hsl(91, 21%, 49%)'
       },
       metric2: {
-        '500': 'hsl(52, 90%, 50%)',
+        '500': 'hsl(52, 90%, 50%)'
       },
       metric3: {
-        '500': 'hsl(206, 43%, 72%)',
+        '500': 'hsl(206, 43%, 72%)'
       },
       metric4: {
-        '500': 'hsl(71, 55%, 49%)',
+        '500': 'hsl(71, 55%, 49%)'
       },
       metric5: {
-        '500': 'hsl(25, 74%, 51%)',
+        '500': 'hsl(25, 74%, 51%)'
       }
     },
     spacing: {
@@ -49,7 +49,7 @@ module.exports = {
       '4': '2rem',
       '5': '4rem',
       '6': '6rem',
-      'i': '1.5rem'
+      i: '1.5rem'
     },
     fontFamily: {
       sans: [
@@ -65,23 +65,17 @@ module.exports = {
         '"Apple Color Emoji"',
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
+        '"Noto Color Emoji"'
       ],
-      serif: [
-        'Georgia',
-        'Cambria',
-        '"Times New Roman"',
-        'Times',
-        'serif',
-      ],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
         'Menlo',
         'Monaco',
         'Consolas',
         '"Liberation Mono"',
         '"Courier New"',
-        'monospace',
-      ],
+        'monospace'
+      ]
     },
     extend: {
       borderWidth: {
