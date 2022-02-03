@@ -21,7 +21,7 @@ jobs:
 
   deploy-test:
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/development'
+    if: github.ref == 'refs/heads/main'
     needs: test
     concurrency: deploy-test
     env:
@@ -51,7 +51,7 @@ jobs:
 
   deploy-prod:
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/prod'
     needs: test
     concurrency: deploy-prod
     env:
