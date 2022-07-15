@@ -33,7 +33,7 @@ export default {
       {
         src: '/matomo/matomo-analytics.js',
         type: 'text/plain',
-        "data-cookiecategory": "targeting"
+        'data-cookiecategory': 'targeting'
       },
       {
         src: '/cookieconsent/cookieconsent.js',

@@ -17,6 +17,9 @@ module.exports = {
   plugins: [
     'prettier'
   ],
+  ignorePatterns: [
+    "/static/cookieconsent/*.js",
+  ],
   rules: {
   }
 }
