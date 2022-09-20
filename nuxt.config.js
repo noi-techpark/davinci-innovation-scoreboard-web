@@ -18,14 +18,7 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            {
-                rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap'
-            },
-            {
-                rel: 'stylesheet',
-                href: '/cookieconsent/cookieconsent.css'
-            }
+            { rel: 'stylesheet', href: 'https://scripts.opendatahub.testingmachine.eu/cookieconsent/cookieconsent.css' }
         ],
         script: [{
                 src: '/matomo/matomo-analytics.js',
@@ -33,12 +26,12 @@ export default {
                 'data-cookiecategory': 'targeting'
             },
             {
-                src: '/cookieconsent/cookieconsent.js',
+                src: 'https://scripts.opendatahub.testingmachine.eu/cookieconsent/cookieconsent.js',
                 defer: true,
                 body: true
             },
             {
-                src: '/cookieconsent/cookieconsent-init.js',
+                src: 'https://scripts.opendatahub.testingmachine.eu/cookieconsent/cookieconsent-init.js',
                 defer: true,
                 body: true
             }

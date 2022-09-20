@@ -27,6 +27,7 @@ jobs:
     env:
       AWS_S3_BUCKET_NAME : "test-innovation-web"
       API: "https://api.innovation.davinci.testingmachine.eu/v1/"
+      SCRIPTS_HOST: 'https://scripts.opendatahub.com'
       KEYCLOAK_CLIENT_ID: "davinci-innovation-scoreboard-web"
       KEYCLOAK_CALLBACK: "https://innovation.davinci.testingmachine.eu/callback"
       KEYCLOAK_AUTHORIZATION_URI: "https://auth.opendatahub.testingmachine.eu/auth/realms/noi/protocol/openid-connect/auth"
@@ -35,6 +36,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Change scripts host to prod
+        run: sed -i -e "s%https://scripts.opendatahub.testingmachine.eu%${{env.SCRIPTS_HOST}}%g" nuxt.config.js
       - name: Build code
         uses: noi-techpark/github-actions/npm-build@v2
         with:
