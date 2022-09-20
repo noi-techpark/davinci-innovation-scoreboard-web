@@ -24,7 +24,7 @@
     "vue-chartjs": "^3.4.2"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^1.1.2",
+    "@nuxtjs/tailwindcss": "^5.3.3",
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
