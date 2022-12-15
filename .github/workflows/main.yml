@@ -60,9 +60,9 @@ jobs:
       SCRIPTS_HOST: 'https://scripts.opendatahub.com'
       KEYCLOAK_CLIENT_ID: "davinci-innovation-scoreboard-web"
       KEYCLOAK_CALLBACK: "https://innovation.davinci.bz.it/callback"
-      KEYCLOAK_AUTHORIZATION_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/protocol/openid-connect/auth"
-      KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/protocol/openid-connect/userinfo"
-      KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.bz.it/auth/realms/noi/account"
+      KEYCLOAK_AUTHORIZATION_URI: "https://auth.opendatahub.com/auth/realms/noi/protocol/openid-connect/auth"
+      KEYCLOAK_USERINFO_URI: "https://auth.opendatahub.com/auth/realms/noi/protocol/openid-connect/userinfo"
+      KEYCLOAK_ACCOUNT_URI: "https://auth.opendatahub.com/auth/realms/noi/account"
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
