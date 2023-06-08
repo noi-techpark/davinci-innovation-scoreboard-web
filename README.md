@@ -6,6 +6,8 @@ SPDX-License-Identifier: CC0-1.0
 
 # Innovation Scoreboard
 
+![REUSE Compliance](https://github.com/noi-techpark/davinci-innovation-scoreboard-web/actions/workflows/reuse.yml/badge.svg)
+
 The innovation scoreboard is a project that aims to visualize the innovation data form South Tyrol and other Italien regions in a user friendly way.
 
 This repository contains the source code for the innovation scoreboard frontend.
