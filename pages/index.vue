@@ -6,6 +6,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div class="my-5">
+    <div class="projectmessage">
+      Project concluded: For more info please write to
+      <a href="mailto:help@opendatahub.com">help@opendatahub.com</a><br /><br />
+    </div>
+
     <div class="title-container w-full flex flex-col">
       <div class="title-box my-4 mr-6">
         <div
@@ -16,18 +21,26 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
     </div>
 
-    <div v-if="loaded" class="flex flex-wrap">
+    <div id="imgplaceholder"></div>
+
+    <!-- <div v-if="loaded" class="flex flex-wrap">
       <Metric
         v-for="(metric, index) in metrics"
         :key="index"
         :index="index"
         :metric="metric"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+export default {
+  auth: false
+}
+</script>
+
+<!-- <script>
 import Metric from '@/components/metric.vue'
 
 export default {
@@ -47,7 +60,7 @@ export default {
     return store.dispatch('metrics/load')
   }
 }
-</script>
+</script> -->
 
 <style scoped>
 .title-container {
@@ -73,5 +86,18 @@ export default {
 
 .title-box {
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+#imgplaceholder {
+  min-height: 750px;
+  background-image: url('/innovationscoreboard.jpg');
+}
+
+.projectmessage {
+  font-size: x-large;
+  font-weight: 600;
+}
+.projectmessage a:hover {
+  text-decoration: underline;
 }
 </style>
